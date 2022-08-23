@@ -1,18 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/23 11:38:38 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/08/23 15:25:15 by eandre-f         ###   ########.fr       */
+/*   Created: 2022/08/23 15:20:00 by eandre-f          #+#    #+#             */
+/*   Updated: 2022/08/23 16:23:19 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
-int	main(void)
+# include <libft.h>
+
+// order: top-down
+
+typedef struct s_layer
 {
-	return (0);
-}
+	int		value;
+	void	*prev;
+	void	*next;
+}	t_layer;
+
+typedef struct s_stack
+{
+	t_layer	*start;
+}	t_stack;
+
+#endif
