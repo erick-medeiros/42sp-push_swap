@@ -14,6 +14,8 @@ CC = cc
 RM = rm -fr
 
 FILES = main.c
+FILES += push_swap.c
+FILES += exit.c
 FILES += language.c
 SRC = $(addprefix $(SRC_DIR), $(FILES))
 OBJ = $(addprefix $(OBJ_DIR), $(FILES:.c=.o))
