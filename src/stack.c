@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:22:13 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/08/24 13:07:09 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/08/24 14:37:58 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,20 +62,26 @@ void	define_next(t_stack *stack, int size)
 int	check_args(int argc, char *argv[])
 {
 	int		i;
-	int		nbr;
+	int		j;
+	int		cmp;
 	char	*str;
 
-	if (argc == 1)
-		return (1);
-	i = 1;
-	while (i < argc)
+	i = 0;
+	while (++i < argc)
 	{
 		str = ft_itoa(ft_atoi(argv[i]));
-		nbr = ft_strcmp(str, argv[i]);
+		cmp = ft_strcmp(str, argv[i]);
 		free(str);
-		if (nbr)
+		if (cmp)
 			return (1);
-		++i;
+	}
+	i = 0;
+	while (++i < argc)
+	{
+		j = i;
+		while (++j < argc)
+			if (ft_atoi(argv[i]) == ft_atoi(argv[j]))
+				return (1);
 	}
 	return (0);
 }
