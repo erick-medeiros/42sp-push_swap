@@ -9,6 +9,9 @@ echo "./push_swap 1 2 oi 3"
 echo "./push_swap 1 2 03 3"
 ./push_swap 1 2 03 3
 
+echo "./push_swap 1 2 03 4"
+./push_swap 1 2 03 4
+
 echo "./push_swap 1 2 3"
 ./push_swap 1 2 3
 

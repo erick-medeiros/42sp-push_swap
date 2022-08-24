@@ -6,11 +6,14 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 19:52:55 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/08/24 17:38:32 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/08/24 18:36:49 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "push_swap.h"
+
+static char	*ignore_zero_left(char *argv);
 
 int	check_args(int argc, char *argv[])
 {
@@ -23,7 +26,7 @@ int	check_args(int argc, char *argv[])
 	while (++i < argc)
 	{
 		str = ft_itoa(ft_atoi(argv[i]));
-		cmp = ft_strcmp(str, argv[i]);
+		cmp = ft_strcmp(str, ignore_zero_left(argv[i]));
 		free(str);
 		if (cmp)
 			return (1);
@@ -37,6 +40,16 @@ int	check_args(int argc, char *argv[])
 				return (1);
 	}
 	return (0);
+}
+
+static char	*ignore_zero_left(char *argv)
+{
+	char	*ref;
+
+	ref = argv;
+	while (ft_strlen(ref) && ref[0] == '0' && ft_isdigit(ref[1]))
+		ref = &ref[1];
+	return (ref);
 }
 
 void	free_stack(t_stack *stack)
