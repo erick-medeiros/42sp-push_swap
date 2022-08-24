@@ -6,82 +6,41 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:22:13 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/08/24 14:37:58 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/08/24 18:03:25 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stddef.h>
 
-void	define_next(t_stack *stack, int size);
-
 void	create_stack(t_stack *stack, int argc, char *argv[])
 {
-	t_layer	*layer;
-	t_layer	*prev;
-	int		i;
+	t_element	*current;
+	t_element	*last;
+	int			i;
 
-	i = 0;
-	while (i < argc - 1)
+	i = argc - 1;
+	last = NULL;
+	while (i >= 1)
 	{
-		layer = malloc(sizeof(t_layer));
-		if (layer == NULL)
+		current = malloc(sizeof(t_element));
+		if (current == NULL)
 			return ;
-		layer->prev = NULL;
-		layer->next = NULL;
-		if (i == 0)
-			stack->start = layer;
-		else
-			layer->prev = prev;
-		layer->value = ft_atoi(argv[i + 1]);
-		prev = layer;
-		++i;
-	}
-	stack->start->prev = prev;
-	define_next(stack, argc - 1);
-}
-
-void	define_next(t_stack *stack, int size)
-{
-	t_layer	*layer;
-	t_layer	*prev;
-	int		i;
-
-	i = size - 1;
-	while (i >= 0)
-	{
-		if (i == size - 1)
-			layer = stack->start;
-		prev = layer->prev;
-		prev->next = layer;
-		layer = layer->prev;
+		current->next = last;
+		current->data = ft_atoi(argv[i]);
+		last = current;
 		--i;
 	}
+	stack->top = last;
 }
 
-int	check_args(int argc, char *argv[])
+void	update_bottom_stack(t_stack *stack)
 {
-	int		i;
-	int		j;
-	int		cmp;
-	char	*str;
+	t_element	*bot;
 
-	i = 0;
-	while (++i < argc)
-	{
-		str = ft_itoa(ft_atoi(argv[i]));
-		cmp = ft_strcmp(str, argv[i]);
-		free(str);
-		if (cmp)
-			return (1);
-	}
-	i = 0;
-	while (++i < argc)
-	{
-		j = i;
-		while (++j < argc)
-			if (ft_atoi(argv[i]) == ft_atoi(argv[j]))
-				return (1);
-	}
-	return (0);
+	bot = stack->top;
+	while (bot && bot->next && bot->next != stack->top)
+		bot = bot->next;
+	if (bot)
+		bot->next = NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 15:27:55 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/08/24 15:02:59 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/08/24 18:03:21 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,59 +68,54 @@ static void	psl_mult(t_stack *stack_a, t_stack *stack_b, char *instruction)
 
 static void	psl_swap(t_stack *stack)
 {
-	t_layer	*layer0;
-	t_layer	*layer1;
-	t_layer	*layer2;
-	t_layer	*layer3;
+	t_element	*top;
+	t_element	*next;
 
-	layer0 = stack->start->prev;
-	layer1 = stack->start;
-	layer2 = stack->start->next;
-	layer3 = ((t_layer *)(stack->start->next))->next;
-	layer0->next = layer2;
-	layer3->prev = layer1;
-	stack->start = layer2;
+	top = stack->top;
+	if (top == NULL || top->next == NULL)
+		return ;
+	next = top->next;
+	top->next = next->next;
+	next->next = top;
+	stack->top = next;
+	update_bottom_stack(stack);
 }
 
 static void	psl_push(t_stack *stack_origin, t_stack *stack_destiny)
 {
-	t_layer	*layer0;
-	t_layer	*layer1;
-	t_layer	*layer2;
+	t_element	*element;
 
-	if (stack_origin->start == NULL)
+	if (stack_origin->top == NULL)
 		return ;
-	layer0 = stack_origin->start->prev;
-	layer1 = stack_origin->start;
-	layer2 = stack_origin->start->next;
-	layer0->next = layer2;
-	layer2->prev = layer0;
-	stack_origin->start = layer2;
-	layer0 = layer1;
-	layer2 = layer1;
-	if (stack_destiny->start)
-		layer0 = stack_destiny->start->prev;
-	if (stack_destiny->start)
-		layer2 = stack_destiny->start;
-	layer1->prev = layer0;
-	layer1->next = layer2;
-	layer0->next = layer1;
-	layer2->prev = layer1;
-	stack_destiny->start = layer1;
+	element = stack_origin->top;
+	stack_origin->top = element->next;
+	element->next = stack_destiny->top;
+	stack_destiny->top = element;
+	update_bottom_stack(stack_origin);
+	update_bottom_stack(stack_destiny);
 }
 
 static void	psl_rotate(t_stack *stack, char *direction)
 {
-	t_layer	*layer;
+	t_element	*top;
+	t_element	*bot;
 
+	top = stack->top;
+	bot = stack->top;
+	while (bot && bot->next)
+		bot = bot->next;
+	if (top == NULL || top == bot)
+		return ;
 	if (!ft_strcmp(direction, "first"))
 	{
-		layer = stack->start;
-		stack->start = layer->next;
+		stack->top = top->next;
+		top->next = NULL;
+		bot->next = top;
 	}
 	else if (!ft_strcmp(direction, "last"))
 	{
-		layer = stack->start;
-		stack->start = layer->prev;
+		bot->next = top;
+		stack->top = bot;
+		update_bottom_stack(stack);
 	}
 }

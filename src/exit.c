@@ -6,23 +6,52 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 19:52:55 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/08/23 21:12:42 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/08/24 17:38:32 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+int	check_args(int argc, char *argv[])
+{
+	int		i;
+	int		j;
+	int		cmp;
+	char	*str;
+
+	i = 0;
+	while (++i < argc)
+	{
+		str = ft_itoa(ft_atoi(argv[i]));
+		cmp = ft_strcmp(str, argv[i]);
+		free(str);
+		if (cmp)
+			return (1);
+	}
+	i = 0;
+	while (++i < argc)
+	{
+		j = i;
+		while (++j < argc)
+			if (ft_atoi(argv[i]) == ft_atoi(argv[j]))
+				return (1);
+	}
+	return (0);
+}
+
 void	free_stack(t_stack *stack)
 {
-	t_layer	*layer;
+	t_element	*element;
+	t_element	*free_element;
 
-	layer = stack->start->next;
-	while (layer && layer->next != stack->start)
+	if (stack == NULL)
+		return ;
+	element = stack->top;
+	while (element)
 	{
-		layer = layer->next;
-		free(layer->prev);
+		free_element = element;
+		element = element->next;
+		free(free_element);
 	}
-	if (stack->start->prev != stack->start)
-		free(stack->start->prev);
-	free(stack->start);
+	stack->top = NULL;
 }
