@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:22:13 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/08/23 21:05:46 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/08/24 00:38:56 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,25 @@ void	define_next(t_stack *stack, int size)
 		layer = layer->prev;
 		--i;
 	}
+}
+
+int	check_args(int argc, char *argv[])
+{
+	size_t	i;
+	int		nbr;
+	char	*str;
+
+	if (argc == 1)
+		return (1);
+	i = 1;
+	while (i < argc)
+	{
+		str = ft_itoa(ft_atoi(argv[i]));
+		nbr = ft_strcmp(str, argv[i]);
+		free(str);
+		if (nbr)
+			return (1);
+		++i;
+	}
+	return (0);
 }
