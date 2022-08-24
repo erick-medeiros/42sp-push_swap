@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:05:43 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/08/24 13:05:17 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/08/24 14:56:03 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,8 @@ void	sort_stacks(t_stack *stack_a, t_stack *stack_b)
 	layer = stack_a->start;
 	while (layer)
 	{
-		ft_printf("%i ", layer->value);
 		layer = layer->next;
 		if (layer == stack_a->start)
 			layer = NULL;
 	}
-	ft_printf("\n");
 }
