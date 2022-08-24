@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 15:27:55 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/08/24 13:06:38 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/08/24 15:02:59 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,12 @@ static void	psl_push(t_stack *stack_origin, t_stack *stack_destiny)
 	layer0->next = layer2;
 	layer2->prev = layer0;
 	stack_origin->start = layer2;
-	layer0 = stack_destiny->start->prev;
-	layer2 = stack_destiny->start;
+	layer0 = layer1;
+	layer2 = layer1;
+	if (stack_destiny->start)
+		layer0 = stack_destiny->start->prev;
+	if (stack_destiny->start)
+		layer2 = stack_destiny->start;
 	layer1->prev = layer0;
 	layer1->next = layer2;
 	layer0->next = layer1;
