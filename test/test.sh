@@ -1,5 +1,8 @@
 #!/bin/bash
 
+echo "./push_swap"
+./push_swap
+
 echo "./push_swap 1 2 oi 3"
 ./push_swap 1 2 oi 3
 

@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 11:38:38 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/08/24 13:01:48 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/08/24 14:18:49 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	main(int argc, char *argv[])
 	t_stack	stack_a;
 	t_stack	stack_b;
 
+	if (argc == 1)
+		return (0);
 	if (check_args(argc, argv))
 	{
 		ft_putendl_fd("Error", STDERR);
