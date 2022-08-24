@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 11:38:38 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/08/24 12:37:06 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/08/24 13:01:48 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	main(int argc, char *argv[])
 		return (1);
 	}
 	create_stack(&stack_a, argc, argv);
+	stack_b.start = NULL;
 	sort_stacks(&stack_a, &stack_b);
 	free_stack(&stack_a);
 	return (0);

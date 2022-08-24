@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 15:20:00 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/08/24 12:35:51 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/08/24 13:00:51 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef struct s_stack
 
 int		check_args(int argc, char *argv[]);
 void	free_stack(t_stack *stack);
+void	psl(t_stack *stack_a, t_stack *stack_b, char *instruction);
 void	create_stack(t_stack *stack, int argc, char *argv[]);
 void	sort_stacks(t_stack *stack_a, t_stack *stack_b);
 

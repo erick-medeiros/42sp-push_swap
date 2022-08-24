@@ -6,28 +6,29 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 15:27:55 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/08/23 17:01:25 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/08/24 13:06:38 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
 #include "push_swap.h"
 
 // push swap language == psl
 
-void	psl_run(t_stack *stack_a, t_stack *stack_b, char *run1, char *run2);
-void	psl_swap(t_stack *stack);
-void	psl_push(t_stack *stack_origin, t_stack *stack_destiny);
-void	psl_rotate(t_stack *stack, char *direction);
-void	psl_reverse_rotate(t_stack *stack);
+static void	psl_mult(t_stack *stack_a, t_stack *stack_b, char *instruction);
+static void	psl_swap(t_stack *stack);
+static void	psl_push(t_stack *stack_origin, t_stack *stack_destiny);
+static void	psl_rotate(t_stack *stack, char *direction);
 
 void	psl(t_stack *stack_a, t_stack *stack_b, char *instruction)
 {
+	ft_putendl_fd(instruction, STDOUT);
 	if (!ft_strcmp(instruction, "sa"))
 		psl_swap(stack_a);
 	else if (!ft_strcmp(instruction, "sb"))
 		psl_swap(stack_b);
 	else if (!ft_strcmp(instruction, "ss"))
-		psl_run(stack_a, stack_b, "sa", "sb");
+		psl_mult(stack_a, stack_b, "ss");
 	else if (!ft_strcmp(instruction, "pa"))
 		psl_push(stack_b, stack_a);
 	else if (!ft_strcmp(instruction, "pb"))
@@ -37,22 +38,35 @@ void	psl(t_stack *stack_a, t_stack *stack_b, char *instruction)
 	else if (!ft_strcmp(instruction, "rb"))
 		psl_rotate(stack_b, "first");
 	else if (!ft_strcmp(instruction, "rr"))
-		psl_run(stack_a, stack_b, "ra", "rb");
+		psl_mult(stack_a, stack_b, "rr");
 	else if (!ft_strcmp(instruction, "rra"))
 		psl_rotate(stack_a, "last");
 	else if (!ft_strcmp(instruction, "rrb"))
 		psl_rotate(stack_b, "last");
 	else if (!ft_strcmp(instruction, "rrr"))
-		psl_run(stack_a, stack_b, "rra", "rrb");
+		psl_mult(stack_a, stack_b, "rrr");
 }
 
-void	psl_run(t_stack *stack_a, t_stack *stack_b, char *run1, char *run2)
+static void	psl_mult(t_stack *stack_a, t_stack *stack_b, char *instruction)
 {
-	psl(stack_a, stack_b, run1);
-	psl(stack_a, stack_b, run2);
+	if (!ft_strcmp(instruction, "ss"))
+	{
+		psl_swap(stack_a);
+		psl_swap(stack_b);
+	}
+	else if (!ft_strcmp(instruction, "rr"))
+	{
+		psl_rotate(stack_a, "first");
+		psl_rotate(stack_b, "first");
+	}
+	else if (!ft_strcmp(instruction, "rrr"))
+	{
+		psl_rotate(stack_a, "last");
+		psl_rotate(stack_b, "last");
+	}
 }
 
-void	psl_swap(t_stack *stack)
+static void	psl_swap(t_stack *stack)
 {
 	t_layer	*layer0;
 	t_layer	*layer1;
@@ -68,7 +82,7 @@ void	psl_swap(t_stack *stack)
 	stack->start = layer2;
 }
 
-void	psl_push(t_stack *stack_origin, t_stack *stack_destiny)
+static void	psl_push(t_stack *stack_origin, t_stack *stack_destiny)
 {
 	t_layer	*layer0;
 	t_layer	*layer1;
@@ -91,7 +105,7 @@ void	psl_push(t_stack *stack_origin, t_stack *stack_destiny)
 	stack_destiny->start = layer1;
 }
 
-void	psl_rotate(t_stack *stack, char *direction)
+static void	psl_rotate(t_stack *stack, char *direction)
 {
 	t_layer	*layer;
 
