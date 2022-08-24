@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:22:13 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/08/24 00:38:56 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/08/24 13:07:09 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	define_next(t_stack *stack, int size)
 
 int	check_args(int argc, char *argv[])
 {
-	size_t	i;
+	int		i;
 	int		nbr;
 	char	*str;
 
