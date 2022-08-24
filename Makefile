@@ -47,4 +47,7 @@ norm:
 	@clear
 	@norminette | grep Error || true
 
-.PHONY: all clean fclean re norm
+test:
+	@bash test/test.sh
+
+.PHONY: all clean fclean re norm test
