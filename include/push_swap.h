@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 15:20:00 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/08/24 00:36:58 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/08/24 12:35:51 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 # define PUSH_SWAP_H
 
 # include <libft.h>
+
+# define STDIN 0
+# define STDOUT 1
+# define STDERR 2
 
 // order: top-down
 

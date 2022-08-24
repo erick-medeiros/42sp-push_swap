@@ -6,12 +6,11 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 11:38:38 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/08/24 00:40:33 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/08/24 12:37:06 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <unistd.h>
 
 int	main(int argc, char *argv[])
 {
@@ -20,7 +19,7 @@ int	main(int argc, char *argv[])
 
 	if (check_args(argc, argv))
 	{
-		write(2, "Error\n", 6);
+		ft_putendl_fd("Error", STDERR);
 		return (1);
 	}
 	create_stack(&stack_a, argc, argv);
