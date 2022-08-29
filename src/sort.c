@@ -6,11 +6,13 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:05:43 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/08/29 16:54:36 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/08/29 17:47:09 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int	stack_not_sorted(t_stack *stack_a, t_stack *stack_b);
 
 void	sort_stacks(t_sorting *sorting, t_stack *stack_a, t_stack *stack_b)
 {
@@ -19,7 +21,7 @@ void	sort_stacks(t_sorting *sorting, t_stack *stack_a, t_stack *stack_b)
 
 	element = stack_a->top;
 	i = 0;
-	while (i < sorting->list_size)
+	while (i < sorting->list_size && stack_not_sorted(stack_a, stack_b))
 	{
 		if (element->data <= sorting->center_pivot)
 			psl(stack_a, stack_b, "pb");
@@ -82,4 +84,25 @@ void	set_sorting_information(t_sorting *sorting, t_stack *stack)
 	sorting->a_pivot = sorting->values[a];
 	sorting->center_pivot = sorting->values[c];
 	sorting->b_pivot = sorting->values[b];
+}
+
+int	stack_not_sorted(t_stack *stack_a, t_stack *stack_b)
+{
+	t_element	*element;
+	int			value;
+
+	if (stack_b->top != NULL)
+		return (1);
+	element = stack_a->top;
+	if (element)
+		value = element->data;
+	while (element)
+	{
+		if (element->data > value)
+			return (1);
+		element = element->next;
+		if (element)
+			value = element->data;
+	}
+	return (0);
 }
