@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:22:13 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/08/24 18:03:25 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/08/29 13:12:33 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,31 @@ void	update_bottom_stack(t_stack *stack)
 		bot = bot->next;
 	if (bot)
 		bot->next = NULL;
+}
+
+void	get_values_from_stack(t_sorting *sorting, t_stack *stack)
+{
+	t_element	*element;
+	size_t		len;
+
+	sorting->values = NULL;
+	len = 0;
+	element = stack->top;
+	while (element && ++len)
+		element = element->next;
+	sorting->list_size = len;
+	if (len == 0)
+		return ;
+	sorting->values = malloc(sizeof(int) * len);
+	if (sorting->values != NULL)
+	{
+		len = 0;
+		element = stack->top;
+		while (element)
+		{
+			sorting->values[len] = element->data;
+			element = element->next;
+			++len;
+		}
+	}
 }

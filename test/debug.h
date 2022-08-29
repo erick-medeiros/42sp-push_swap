@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:18:21 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/08/24 17:36:40 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/08/29 13:14:59 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define DEBUG_H
 
 # include "../include/push_swap.h"
+# include <stddef.h>
 
 void	stacks_debug(t_stack *stack_a, t_stack *stack_b)
 {
@@ -62,6 +63,19 @@ void	stacks_debug_ptr(t_stack *stack_a, t_stack *stack_b)
 		element = element->next;
 	}
 	ft_printf("\n");
+}
+
+void	debug_values(t_sorting *sorting)
+{
+	int	i;
+
+	ft_printf("values:\n");
+	i = 0;
+	while (sorting->values && i < sorting->list_size)
+	{
+		ft_printf("value %i\n", sorting->values[i]);
+		++i;
+	}
 }
 
 #endif
