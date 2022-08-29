@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:05:43 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/08/29 17:47:09 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/08/29 17:58:29 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,11 @@ int	stack_not_sorted(t_stack *stack_a, t_stack *stack_b)
 		value = element->data;
 	while (element)
 	{
-		if (element->data > value)
+		if (element && element != stack_a->top && element->data < value)
 			return (1);
-		element = element->next;
 		if (element)
 			value = element->data;
+		element = element->next;
 	}
 	return (0);
 }
