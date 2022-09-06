@@ -6,12 +6,11 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:30:43 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/06 15:46:01 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/06 15:49:00 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>
 
 static void	quick_sort(t_sorting *sorting, int **values, int start, int end)
 {
