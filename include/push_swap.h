@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 15:20:00 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/06 16:37:24 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/06 19:09:34 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ int		stack_size(t_stack *stack);
 void	sort_stacks(t_sorting *sorting, t_stack *stack_a, t_stack *stack_b);
 void	set_sorting_information(t_sorting *sorting, t_stack *stack);
 void	get_values_from_stack(t_stack *stack, int *list_size, int **values);
+void	get_all_elements(t_sorting *sorting, t_stack *stack_a);
 
 #endif

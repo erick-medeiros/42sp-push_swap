@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:30:43 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/06 15:49:00 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/06 19:09:12 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,10 @@ void	set_sorting_information(t_sorting *sorting, t_stack *stack)
 	b = ft_max((sorting->tmp_size / 4) - 1, 0);
 	sorting->center_pivot = sorting->tmp_values[c];
 	sorting->b_pivot = sorting->tmp_values[b];
+}
+
+void	get_all_elements(t_sorting *sorting, t_stack *stack_a)
+{
+	get_values_from_stack(stack_a, &sorting->list_size, &sorting->values);
+	quick_sort(sorting, &sorting->tmp_values, 0, sorting->tmp_size - 1);
 }
