@@ -18,6 +18,7 @@ FILES += exit.c
 FILES += sort.c
 FILES += language.c
 FILES += stack.c
+FILES += values.c
 SRC = $(addprefix $(SRC_DIR), $(FILES))
 OBJ = $(addprefix $(OBJ_DIR), $(FILES:.c=.o))
 
