@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:05:43 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/06 14:41:13 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/06 15:36:15 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@ void	sort_stacks(t_sorting *sorting, t_stack *stack_a, t_stack *stack_b)
 	t_element	*element;
 	int			i;
 
+	set_sorting_information(sorting, stack_a);
 	element = stack_a->top;
 	i = 0;
-	while (i < sorting->list_size && stack_not_sorted(stack_a, stack_b))
+	while (i < sorting->tmp_size && stack_not_sorted(stack_a, stack_b))
 	{
 		if (element && element->data <= sorting->center_pivot)
 			psl(stack_a, stack_b, "pb");
@@ -28,6 +29,7 @@ void	sort_stacks(t_sorting *sorting, t_stack *stack_a, t_stack *stack_b)
 		element = stack_a->top;
 		++i;
 	}
+	free(sorting->tmp_values);
 }
 
 int	stack_not_sorted(t_stack *stack_a, t_stack *stack_b)
