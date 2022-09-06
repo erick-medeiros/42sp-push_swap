@@ -6,33 +6,33 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:30:43 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/06 14:34:40 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/06 15:22:38 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	get_values_from_stack(t_sorting *sorting, t_stack *stack)
+void	get_values_from_stack(t_stack *stack, int *list_size, int **values)
 {
 	t_element	*element;
 	size_t		len;
 
-	sorting->values = NULL;
+	*values = NULL;
 	len = 0;
 	element = stack->top;
 	while (element && ++len)
 		element = element->next;
-	sorting->list_size = len;
+	*list_size = len;
 	if (len == 0)
 		return ;
-	sorting->values = malloc(sizeof(int) * len);
-	if (sorting->values != NULL)
+	*values = malloc(sizeof(int) * len);
+	if (*values != NULL)
 	{
 		len = 0;
 		element = stack->top;
 		while (element)
 		{
-			sorting->values[len] = element->data;
+			*values[len] = element->data;
 			element = element->next;
 			++len;
 		}
@@ -70,25 +70,13 @@ void	quick_sort(t_sorting *sorting, int start, int end)
 
 void	set_sorting_information(t_sorting *sorting, t_stack *stack)
 {
-	t_element	*element;
-	int			a;
 	int			b;
 	int			c;
 
-	sorting->min = 0;
-	sorting->max = 0;
-	element = stack->top;
-	while (element)
-	{
-		sorting->min = ft_min(sorting->min, element->data);
-		sorting->max = ft_max(sorting->max, element->data);
-		element = element->next;
-	}
-	quick_sort(sorting, 0, sorting->list_size - 1);
-	a = ft_max((sorting->list_size * 3 / 4) - 1, 0);
-	c = ft_max((sorting->list_size / 2) - 1, 0);
-	b = ft_max((sorting->list_size * 1 / 4) - 1, 0);
-	sorting->a_pivot = sorting->values[a];
-	sorting->center_pivot = sorting->values[c];
-	sorting->b_pivot = sorting->values[b];
+	get_values_from_stack(stack, &(sorting->tmp_size), &sorting->tmp_values);
+	quick_sort(sorting, 0, sorting->tmp_size - 1);
+	c = ft_max((sorting->tmp_size / 2) - 1, 0);
+	b = ft_max((sorting->tmp_size / 4) - 1, 0);
+	sorting->center_pivot = sorting->tmp_values[c];
+	sorting->b_pivot = sorting->tmp_values[b];
 }

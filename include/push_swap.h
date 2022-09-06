@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 15:20:00 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/06 14:40:44 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/06 15:21:55 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,10 @@ typedef struct s_sorting
 {
 	int	list_size;
 	int	*values;
-	int	a_pivot;
 	int	b_pivot;
 	int	center_pivot;
-	int	min;
-	int	max;
+	int	tmp_size;
+	int	*tmp_values;
 }	t_sorting;
 
 int		check_args(int argc, char *argv[]);
@@ -49,6 +48,6 @@ void	update_bottom_stack(t_stack *stack);
 void	sort_stacks(t_sorting *sorting, t_stack *stack_a, t_stack *stack_b);
 int		stack_not_sorted(t_stack *stack_a, t_stack *stack_b);
 void	set_sorting_information(t_sorting *sorting, t_stack *stack);
-void	get_values_from_stack(t_sorting *sorting, t_stack *stack);
+void	get_values_from_stack(t_stack *stack, int *list_size, int **values);
 
 #endif
