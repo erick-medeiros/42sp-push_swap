@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:18:21 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/08/29 13:14:59 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/06 16:22:55 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,12 @@ void	debug_values(t_sorting *sorting)
 		ft_printf("value %i\n", sorting->values[i]);
 		++i;
 	}
+}
+
+void	debug_pivots(t_sorting *sorting)
+{
+	ft_printf("pivots:\n");
+	ft_printf("center %i\n", sorting->center_pivot);
 }
 
 #endif

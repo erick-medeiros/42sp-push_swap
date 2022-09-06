@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:22:13 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/06 14:34:19 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/06 16:42:59 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,19 @@ void	update_bottom_stack(t_stack *stack)
 		bot = bot->next;
 	if (bot)
 		bot->next = NULL;
+}
+
+int	stack_size(t_stack *stack)
+{
+	t_element	*element;
+	int			size;
+
+	size = 0;
+	element = stack->top;
+	while (element)
+	{
+		element = element->next;
+		++size;
+	}
+	return (size);
 }
