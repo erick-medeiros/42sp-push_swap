@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:05:43 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/06 16:48:24 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/06 18:39:10 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,17 +49,17 @@ static int	pivot_separated_stack(t_stack *stack, int pivot)
 
 static void	swap_top(t_stack *stack_a, t_stack *stack_b, char *instruction)
 {
-	if (!ft_strcmp(instruction, "sb"))
-	{
-		if (stack_b->top && stack_b->top->next)
-			if (stack_b->top->data > ((t_element *)(stack_b->top->next))->data)
-				psl(stack_a, stack_b, "sb");
-	}
-	else if (!ft_strcmp(instruction, "sa"))
+	if (!ft_strcmp(instruction, "sa"))
 	{
 		if (stack_a->top && stack_a->top->next)
 			if (stack_a->top->data > ((t_element *)(stack_a->top->next))->data)
 				psl(stack_a, stack_b, "sa");
+	}
+	else if (!ft_strcmp(instruction, "sb"))
+	{
+		if (stack_b->top && stack_b->top->next)
+			if (stack_b->top->data < ((t_element *)(stack_b->top->next))->data)
+				psl(stack_a, stack_b, "sb");
 	}
 }
 
@@ -74,11 +74,11 @@ void	sort_stacks(t_sorting *sorting, t_stack *stack_a, t_stack *stack_b)
 		while (stack_not_sorted(stack_a, stack_b)
 			&& pivot_separated_stack(stack_a, sorting->center_pivot))
 		{
-			swap_top(stack_a, stack_b, "sb");
 			if (stack_a->top && stack_a->top->data <= sorting->center_pivot)
 				psl(stack_a, stack_b, "pb");
 			else
 				psl(stack_a, stack_b, "ra");
+			swap_top(stack_a, stack_b, "sb");
 			++i;
 		}
 		free(sorting->tmp_values);
