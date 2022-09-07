@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:05:43 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/07 10:47:52 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/07 11:23:55 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	pulling_to_b(t_sorting *sorting, t_stack *stack_a, t_stack *stack_b)
 {
-	while (stack_not_sorted(stack_a, stack_b) && stack_size(stack_a) > 2)
+	while (stack_not_sorted(stack_a, stack_b) && stack_size(stack_a) > 1)
 	{
 		set_sorting_information(sorting, stack_a);
 		while (stack_not_sorted(stack_a, stack_b)

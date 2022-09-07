@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 19:47:24 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/07 10:42:23 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/07 11:21:31 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ int	next_element(t_sorting *sorting, t_stack *stack_a)
 		++i;
 	if (sorting->values[i] == number)
 	{
-		if (i + 1 < sorting->list_size)
-			++i;
+		if (i - 1 >= 0)
+			--i;
 		return (sorting->values[i]);
 	}
 	return (0);

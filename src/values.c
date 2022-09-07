@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:30:43 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/06 19:09:12 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/07 11:18:00 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,5 @@ void	set_sorting_information(t_sorting *sorting, t_stack *stack)
 void	get_all_elements(t_sorting *sorting, t_stack *stack_a)
 {
 	get_values_from_stack(stack_a, &sorting->list_size, &sorting->values);
-	quick_sort(sorting, &sorting->tmp_values, 0, sorting->tmp_size - 1);
+	quick_sort(sorting, &sorting->values, 0, sorting->list_size - 1);
 }
