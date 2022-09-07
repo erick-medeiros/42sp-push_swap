@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 15:20:00 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/06 19:09:34 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/07 10:31:09 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,15 @@ void	psl(t_stack *stack_a, t_stack *stack_b, char *instruction);
 void	create_stack(t_stack *stack, int argc, char *argv[]);
 void	update_bottom_stack(t_stack *stack);
 int		stack_size(t_stack *stack);
-void	sort_stacks(t_sorting *sorting, t_stack *stack_a, t_stack *stack_b);
 void	set_sorting_information(t_sorting *sorting, t_stack *stack);
 void	get_values_from_stack(t_stack *stack, int *list_size, int **values);
 void	get_all_elements(t_sorting *sorting, t_stack *stack_a);
+int		stack_not_sorted(t_stack *stack_a, t_stack *stack_b);
+int		pivot_separated_stack(t_stack *stack, int pivot);
+void	swap_top(t_stack *stack_a, t_stack *stack_b, char *instruction);
+int		best_top_move(t_stack *stack, int number);
+int		next_element(t_sorting *sorting, t_stack *stack_a);
+int		best_pulling_move(t_stack *stack, int pivot);
+void	sort_stacks(t_sorting *sorting, t_stack *stack_a, t_stack *stack_b);
 
 #endif

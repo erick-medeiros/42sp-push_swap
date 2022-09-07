@@ -16,6 +16,7 @@ RM = rm -fr
 FILES = main.c
 FILES += exit.c
 FILES += sort.c
+FILES += sorting_utils.c
 FILES += language.c
 FILES += stack.c
 FILES += values.c
