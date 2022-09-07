@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 19:52:55 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/08/24 18:36:49 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/07 20:17:23 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,10 @@ void	free_stack(t_stack *stack)
 		free(free_element);
 	}
 	stack->top = NULL;
+}
+
+void	exit_program(int status, char *msg, int fd)
+{
+	ft_putendl_fd(msg, fd);
+	exit(status);
 }

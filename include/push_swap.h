@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 15:20:00 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/07 10:31:09 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/07 20:16:18 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_sorting
 
 int		check_args(int argc, char *argv[]);
 void	free_stack(t_stack *stack);
+void	exit_program(int status, char *msg, int fd);
 void	psl(t_stack *stack_a, t_stack *stack_b, char *instruction);
 void	create_stack(t_stack *stack, int argc, char *argv[]);
 void	update_bottom_stack(t_stack *stack);
