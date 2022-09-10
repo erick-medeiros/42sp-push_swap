@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:18:21 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/06 16:22:55 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/10 12:11:16 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	stacks_debug(t_stack *stack_a, t_stack *stack_b)
 	while (element_a || element_b)
 	{
 		if (element_a && element_b)
-			ft_printf("%i %i\n", element_a->data, element_b->data);
+			ft_printf("%i | %i\n", element_a->data, element_b->data);
 		else if (element_a)
 			ft_printf("%i\n", element_a->data);
 		else if (element_b)
@@ -74,6 +74,19 @@ void	debug_values(t_sorting *sorting)
 	while (sorting->values && i < sorting->list_size)
 	{
 		ft_printf("value %i\n", sorting->values[i]);
+		++i;
+	}
+}
+
+void	debug_tmp_values(t_sorting *sorting)
+{
+	int	i;
+
+	ft_printf("values:\n");
+	i = 0;
+	while (sorting->tmp_values && i < sorting->tmp_size)
+	{
+		ft_printf("value %i\n", sorting->tmp_values[i]);
 		++i;
 	}
 }
