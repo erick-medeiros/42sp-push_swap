@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 15:20:00 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/07 20:16:18 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/10 20:16:01 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void	psl(t_stack *stack_a, t_stack *stack_b, char *instruction);
 void	create_stack(t_stack *stack, int argc, char *argv[]);
 void	update_bottom_stack(t_stack *stack);
 int		stack_size(t_stack *stack);
+int		stack_value(t_stack *stack, int position);
 void	set_sorting_information(t_sorting *sorting, t_stack *stack);
 void	get_values_from_stack(t_stack *stack, int *list_size, int **values);
 void	get_all_elements(t_sorting *sorting, t_stack *stack_a);

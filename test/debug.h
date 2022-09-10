@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:18:21 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/10 12:11:16 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/10 14:22:48 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ void	stacks_debug(t_stack *stack_a, t_stack *stack_b)
 		if (element_a && element_b)
 			ft_printf("%i | %i\n", element_a->data, element_b->data);
 		else if (element_a)
-			ft_printf("%i\n", element_a->data);
+			ft_printf("%i |\n", element_a->data);
 		else if (element_b)
-			ft_printf("  %i\n", element_b->data);
+			ft_printf(" | %i\n", element_b->data);
 		if (element_a)
 			element_a = element_a->next;
 		if (element_b)
