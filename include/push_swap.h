@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 15:20:00 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/10 20:16:01 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/12 18:35:46 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,13 @@ typedef struct s_sorting
 	int	*tmp_values;
 }	t_sorting;
 
+typedef struct s_move
+{
+	int	total;
+	int	new_top;
+	int	valid;
+}	t_move;
+
 int		check_args(int argc, char *argv[]);
 void	free_stack(t_stack *stack);
 void	exit_program(int status, char *msg, int fd);
@@ -48,6 +55,7 @@ void	create_stack(t_stack *stack, int argc, char *argv[]);
 void	update_bottom_stack(t_stack *stack);
 int		stack_size(t_stack *stack);
 int		stack_value(t_stack *stack, int position);
+int		stack_index(t_stack *stack, int value);
 void	set_sorting_information(t_sorting *sorting, t_stack *stack);
 void	get_values_from_stack(t_stack *stack, int *list_size, int **values);
 void	get_all_elements(t_sorting *sorting, t_stack *stack_a);

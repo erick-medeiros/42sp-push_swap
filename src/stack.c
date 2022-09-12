@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:22:13 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/10 14:59:48 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/12 18:16:25 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ int	stack_value(t_stack *stack, int position)
 	int			i;
 	int			value;
 
+	if (position <= 0)
+		position = stack_size(stack);
 	--position;
-	if (position < 0)
-		position = 0;
 	value = 0;
 	i = 0;
 	element = stack->top;
@@ -80,4 +80,19 @@ int	stack_value(t_stack *stack, int position)
 	if (element)
 		value = element->data;
 	return (value);
+}
+
+int	stack_index(t_stack *stack, int value)
+{
+	int	len;
+	int	i;
+
+	len = stack_size(stack);
+	i = 0;
+	if (len == 0)
+		return (i);
+	while (++i <= len)
+		if (stack_value(stack, i) == value)
+			return (i);
+	return (0);
 }
