@@ -6,33 +6,11 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:22:13 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/12 18:16:25 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/13 00:30:49 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stddef.h>
-
-void	create_stack(t_stack *stack, int argc, char *argv[])
-{
-	t_element	*current;
-	t_element	*last;
-	int			i;
-
-	i = argc - 1;
-	last = NULL;
-	while (i >= 1)
-	{
-		current = malloc(sizeof(t_element));
-		if (current == NULL)
-			return ;
-		current->next = last;
-		current->data = ft_atoi(argv[i]);
-		last = current;
-		--i;
-	}
-	stack->top = last;
-}
 
 void	update_bottom_stack(t_stack *stack)
 {
@@ -43,6 +21,27 @@ void	update_bottom_stack(t_stack *stack)
 		bot = bot->next;
 	if (bot)
 		bot->next = NULL;
+}
+
+int	stack_not_sorted(t_stack *stack_a, t_stack *stack_b)
+{
+	t_element	*element;
+	int			value;
+
+	if (stack_b->top != NULL)
+		return (1);
+	element = stack_a->top;
+	if (element)
+		value = element->data;
+	while (element)
+	{
+		if (element && element != stack_a->top && element->data < value)
+			return (1);
+		if (element)
+			value = element->data;
+		element = element->next;
+	}
+	return (0);
 }
 
 int	stack_size(t_stack *stack)

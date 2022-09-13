@@ -6,13 +6,13 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 14:30:43 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/10 14:28:09 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/12 21:32:45 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	quick_sort(t_sorting *sorting, int **values, int start, int end)
+void	quick_sort(int **values, int start, int end)
 {
 	int	pivot;
 	int	temp;
@@ -37,54 +37,27 @@ static void	quick_sort(t_sorting *sorting, int **values, int start, int end)
 	temp = (*values)[i];
 	(*values)[i] = (*values)[end];
 	(*values)[end] = temp;
-	quick_sort(sorting, values, start, i - 1);
-	quick_sort(sorting, values, i + 1, end);
+	quick_sort(values, start, i - 1);
+	quick_sort(values, i + 1, end);
 }
 
-void	get_values_from_stack(t_stack *stack, int *list_size, int **values)
+int	get_center_pivot(t_stack *stack)
 {
-	t_element	*element;
-	size_t		len;
+	int	list_size;
+	int	*values;
+	int	i;
+	int	pivot;
 
-	*values = NULL;
-	len = 0;
-	element = stack->top;
-	while (element && ++len)
-		element = element->next;
-	*list_size = len;
-	if (len == 0)
-		return ;
-	*values = malloc(sizeof(int) * len);
-	if (*values != NULL)
-	{
-		len = 0;
-		element = stack->top;
-		while (element)
-		{
-			(*values)[len] = element->data;
-			element = element->next;
-			++len;
-		}
-	}
-}
-
-void	set_sorting_information(t_sorting *sorting, t_stack *stack)
-{
-	int			b;
-	int			c;
-
-	get_values_from_stack(stack, &(sorting->tmp_size), &sorting->tmp_values);
-	quick_sort(sorting, &sorting->tmp_values, 0, sorting->tmp_size - 1);
-	c = ft_max((sorting->tmp_size / 2) - 1, 0);
-	b = ft_max((sorting->tmp_size / 4) - 1, 0);
-	sorting->center_pivot = sorting->tmp_values[c];
-	sorting->b_pivot = sorting->tmp_values[b];
-}
-
-void	get_all_elements(t_sorting *sorting, t_stack *stack_a)
-{
-	sorting->values = NULL;
-	sorting->tmp_values = NULL;
-	get_values_from_stack(stack_a, &sorting->list_size, &sorting->values);
-	quick_sort(sorting, &sorting->values, 0, sorting->list_size - 1);
+	list_size = stack_size(stack);
+	values = malloc(sizeof(int) * list_size);
+	if (values == NULL)
+		return (0);
+	i = -1;
+	while (++i < list_size)
+		values[i] = stack_value(stack, i + 1);
+	quick_sort(&values, 0, list_size - 1);
+	i = ft_max((list_size / 2) - 1, 0);
+	pivot = values[i];
+	free(values);
+	return (pivot);
 }

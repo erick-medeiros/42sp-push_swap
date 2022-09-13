@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/24 17:18:21 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/10 14:22:48 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/12 22:28:28 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,36 +65,17 @@ void	stacks_debug_ptr(t_stack *stack_a, t_stack *stack_b)
 	ft_printf("\n");
 }
 
-void	debug_values(t_sorting *sorting)
+void	debug_values(t_sort *sort)
 {
 	int	i;
 
 	ft_printf("values:\n");
 	i = 0;
-	while (sorting->values && i < sorting->list_size)
+	while (sort->values && i < sort->list_size)
 	{
-		ft_printf("value %i\n", sorting->values[i]);
+		ft_printf("value %i\n", sort->values[i]);
 		++i;
 	}
-}
-
-void	debug_tmp_values(t_sorting *sorting)
-{
-	int	i;
-
-	ft_printf("values:\n");
-	i = 0;
-	while (sorting->tmp_values && i < sorting->tmp_size)
-	{
-		ft_printf("value %i\n", sorting->tmp_values[i]);
-		++i;
-	}
-}
-
-void	debug_pivots(t_sorting *sorting)
-{
-	ft_printf("pivots:\n");
-	ft_printf("center %i\n", sorting->center_pivot);
 }
 
 #endif

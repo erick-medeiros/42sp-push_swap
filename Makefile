@@ -16,6 +16,7 @@ CC = cc
 RM = rm -fr
 
 FILES = main.c
+FILES += init.c
 FILES += exit.c
 FILES += sort.c
 FILES += sorting_utils.c
@@ -27,6 +28,7 @@ SRC = $(addprefix $(SRC_DIR), $(FILES))
 OBJ = $(addprefix $(OBJ_DIR), $(FILES:.c=.o))
 
 FILES_BONUS = main_bonus.c
+FILES_BONUS += init.c
 FILES_BONUS += exit.c
 FILES_BONUS += sort.c
 FILES_BONUS += sorting_utils.c

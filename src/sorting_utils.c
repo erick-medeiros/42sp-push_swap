@@ -6,32 +6,11 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 19:47:24 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/07 11:21:31 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/12 23:12:06 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int	stack_not_sorted(t_stack *stack_a, t_stack *stack_b)
-{
-	t_element	*element;
-	int			value;
-
-	if (stack_b->top != NULL)
-		return (1);
-	element = stack_a->top;
-	if (element)
-		value = element->data;
-	while (element)
-	{
-		if (element && element != stack_a->top && element->data < value)
-			return (1);
-		if (element)
-			value = element->data;
-		element = element->next;
-	}
-	return (0);
-}
 
 int	pivot_separated_stack(t_stack *stack, int pivot)
 {
@@ -47,78 +26,27 @@ int	pivot_separated_stack(t_stack *stack, int pivot)
 	return (0);
 }
 
-int	best_top_move(t_stack *stack, int number)
+void	best_top_move_a(t_stack *stack_a, t_stack *stack_b, int value)
 {
-	t_element	*element;
-	int			found;
-	int			move1;
-	int			move2;
+	int	size;
+	int	ra_i;
+	int	rra_i;
+	int	i;
 
-	move1 = 0;
-	move2 = 0;
-	found = 0;
-	element = stack->top;
-	while (element)
-	{
-		if (element->data == number)
-			found = 1;
-		if (found)
-			++move2;
-		else
-			++move1;
-		element = element->next;
-	}
-	if (move1 > move2)
-		return (1);
-	else
-		return (2);
-}
-
-int	next_element(t_sorting *sorting, t_stack *stack_a)
-{
-	int			number;
-	int			i;
-
-	number = 0;
-	if (stack_a->top)
-		number = stack_a->top->data;
+	size = stack_size(stack_a);
 	i = 0;
-	while (i < sorting->list_size && sorting->values[i] != number)
-		++i;
-	if (sorting->values[i] == number)
-	{
-		if (i - 1 >= 0)
-			--i;
-		return (sorting->values[i]);
-	}
-	return (0);
-}
-
-int	best_pulling_move(t_stack *stack, int pivot)
-{
-	t_element	*element;
-	int			found;
-	int			move1;
-	int			move2;
-
-	move1 = 0;
-	move2 = 0;
-	found = 0;
-	element = stack->top;
-	while (element)
-	{
-		if (element->data <= pivot)
-		{
-			found = 1;
-			move2 = 0;
-		}
-		if (found)
-			++move2;
-		else
-			++move1;
-		element = element->next;
-	}
-	if (move1 <= move2)
-		return (1);
-	return (2);
+	ra_i = 0;
+	while (++i <= size && stack_value(stack_a, i) == value)
+		++ra_i;
+	i = size + 1;
+	rra_i = 0;
+	while (--i > 0 && stack_value(stack_a, i) == value)
+		++rra_i;
+	i = 0;
+	if (ra_i <= rra_i)
+		while (++i <= ra_i)
+			psl(stack_a, stack_b, "ra");
+	else
+		while (++i <= rra_i)
+			psl(stack_a, stack_b, "rra");
 }
