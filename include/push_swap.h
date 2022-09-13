@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 15:20:00 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/13 12:55:16 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/13 15:05:19 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,20 @@
 # define STDIN 0
 # define STDOUT 1
 # define STDERR 2
+
+enum e_instructions
+{
+	RUN_NONE,
+	RUN_SA,
+	RUN_SB,
+	RUN_SS,
+	RUN_PA,
+	RUN_PB,
+	RUN_RA,
+	RUN_RB,
+	RUN_RR,
+	RUN_RRB,
+};
 
 typedef struct s_element
 {

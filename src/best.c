@@ -6,11 +6,10 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 12:01:45 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/13 13:01:10 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/13 16:43:39 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "push_swap.h"
 
 static int	count_to_top(t_sort *sort, int index_b)
@@ -70,26 +69,60 @@ int	best_pulling_to_a(t_sort *sort)
 	t_move	rrb;
 
 	if (stack_index(&sort->stack_a, best_value_to_pull_b(sort, 1)) == 1)
-		return (0);
+		return (RUN_PA);
 	none.total = count_to_top(sort, 1);
 	none.new_top = stack_value(&sort->stack_b, 2);
 	sb.total = count_to_top(sort, 2) + 1;
 	if (stack_size(&sort->stack_b) <= 2)
-		return (1);
+		return (RUN_SB);
 	sb.new_top = stack_value(&sort->stack_b, 1);
 	rb.total = count_to_top(sort, 2) + 1;
 	rb.new_top = stack_value(&sort->stack_b, 3);
 	rrb.total = count_to_top(sort, stack_size(&sort->stack_b)) + 1;
 	rrb.new_top = stack_value(&sort->stack_b, stack_size(&sort->stack_b) - 1);
-	if (none.total <= ft_min(rb.total, rrb.total) && none.total <= sb.total)
-		return (4);
-	if (sb.total <= ft_min(rb.total, rrb.total))
-		return (1);
-	if (rb.total <= ft_min(sb.total, rrb.total))
-		return (2);
-	if (rrb.total <= ft_min(sb.total, rb.total))
-		return (3);
-	return (4);
+	if (none.total < sb.total && none.total < ft_min(rb.total, rrb.total))
+		return (RUN_NONE);
+	if (none.total == sb.total && none.total < ft_min(rb.total, rrb.total))
+	{
+		if (none.new_top > sb.new_top)
+			return (RUN_NONE);
+		return (RUN_SB);
+	}
+	if (none.total == rb.total && none.total < ft_min(sb.total, rrb.total))
+	{
+		if (none.new_top > rb.new_top)
+			return (RUN_NONE);
+		return (RUN_RB);
+	}
+	if (none.total == rrb.total && none.total < ft_min(sb.total, rb.total))
+	{
+		if (none.new_top > rrb.new_top)
+			return (RUN_NONE);
+		return (RUN_RRB);
+	}
+	if (sb.total < ft_min(rb.total, rrb.total))
+		return (RUN_SB);
+	if (sb.total == rb.total && sb.total < rrb.total)
+	{
+		if (sb.new_top > rb.new_top)
+			return (RUN_SB);
+		return (RUN_RB);
+	}
+	if (sb.total == rrb.total && sb.total < rb.total)
+	{
+		if (sb.new_top > rrb.new_top)
+			return (RUN_SB);
+		return (RUN_RRB);
+	}
+	if (rb.total < rrb.total)
+		return (RUN_RB);
+	if (rb.total == rrb.total)
+	{
+		if (rb.new_top > rrb.new_top)
+			return (RUN_RB);
+		return (RUN_RRB);
+	}
+	return (RUN_RRB);
 }
 
 void	pulling_to_top_a(t_sort *sort, int value)

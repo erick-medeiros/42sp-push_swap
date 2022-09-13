@@ -22,7 +22,6 @@ FILES += sort.c
 FILES += sorting_utils.c
 FILES += language.c
 FILES += stack.c
-FILES += values.c
 FILES += best.c
 SRC = $(addprefix $(SRC_DIR), $(FILES))
 OBJ = $(addprefix $(OBJ_DIR), $(FILES:.c=.o))
@@ -34,7 +33,6 @@ FILES_BONUS += sort.c
 FILES_BONUS += sorting_utils.c
 FILES_BONUS += language.c
 FILES_BONUS += stack.c
-FILES_BONUS += values.c
 FILES_BONUS += best.c
 SRC_BONUS = $(addprefix $(BONUS_DIR), $(FILES_BONUS))
 OBJ_BONUS = $(addprefix $(OBJ_DIR), $(FILES_BONUS:.c=.o))

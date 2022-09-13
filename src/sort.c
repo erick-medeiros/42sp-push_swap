@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:05:43 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/13 12:14:53 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/13 16:47:37 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,15 +65,15 @@ void	pulling_to_a(t_sort *sort, t_stack *stack_a, t_stack *stack_b)
 {
 	while (stack_size(stack_b) > 0)
 	{
-		if (best_pulling_to_a(sort) == 0)
+		if (best_pulling_to_a(sort) == RUN_PA)
 			psl(stack_a, stack_b, "pa");
 		else
 		{
-			if (best_pulling_to_a(sort) == 1)
+			if (best_pulling_to_a(sort) == RUN_SB)
 				psl(stack_a, stack_b, "sb");
-			if (best_pulling_to_a(sort) == 2)
+			else if (best_pulling_to_a(sort) == RUN_RB)
 				psl(stack_a, stack_b, "rb");
-			if (best_pulling_to_a(sort) == 3)
+			else if (best_pulling_to_a(sort) == RUN_RRB)
 				psl(stack_a, stack_b, "rrb");
 			pulling_to_top_a(sort, best_value_to_pull_b(sort, 1));
 		}

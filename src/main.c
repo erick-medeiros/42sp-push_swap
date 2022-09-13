@@ -6,14 +6,14 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 11:38:38 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/12 21:28:03 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/13 16:46:59 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include "../test/debug.h"
 
-// stacks_debug(&stack_a, &stack_b);
+// stacks_debug(&sort.stack_a, &sort.stack_b);
 // stacks_debug_ptr(&stack_a, &stack_b);
 // debug_values(&sorting);
 
