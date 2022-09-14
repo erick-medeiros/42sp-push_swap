@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 19:52:55 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/12 21:56:23 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/14 17:11:19 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	free_sort(t_sort *sort)
 {
 	free_stack(&sort->stack_a);
 	free_stack(&sort->stack_b);
-	free(sort->values);
 }
 
 void	exit_program(int status, char *msg, int fd)

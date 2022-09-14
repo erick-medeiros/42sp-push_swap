@@ -6,52 +6,13 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 19:47:24 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/13 16:38:07 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/14 17:24:47 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	pivot_separated_stack(t_stack *stack, int pivot)
-{
-	t_element	*element;
-
-	element = stack->top;
-	while (element)
-	{
-		if (element->data <= pivot)
-			return (1);
-		element = element->next;
-	}
-	return (0);
-}
-
-void	best_top_move_a(t_stack *stack_a, t_stack *stack_b, int value)
-{
-	int	size;
-	int	ra_i;
-	int	rra_i;
-	int	i;
-
-	size = stack_size(stack_a);
-	i = 0;
-	ra_i = 0;
-	while (++i <= size && stack_value(stack_a, i) == value)
-		++ra_i;
-	i = size + 1;
-	rra_i = 0;
-	while (--i > 0 && stack_value(stack_a, i) == value)
-		++rra_i;
-	i = 0;
-	if (ra_i <= rra_i)
-		while (++i <= ra_i)
-			psl(stack_a, stack_b, "ra");
-	else
-		while (++i <= rra_i)
-			psl(stack_a, stack_b, "rra");
-}
-
-void	quick_sort(int **values, int start, int end)
+static void	quick_sort(int **values, int start, int end)
 {
 	int	pivot;
 	int	temp;
@@ -80,7 +41,7 @@ void	quick_sort(int **values, int start, int end)
 	quick_sort(values, i + 1, end);
 }
 
-int	get_center_pivot(t_stack *stack)
+int	get_center_pivot(t_stack *stack, int division)
 {
 	int	list_size;
 	int	*values;
@@ -95,8 +56,24 @@ int	get_center_pivot(t_stack *stack)
 	while (++i < list_size)
 		values[i] = stack_value(stack, i + 1);
 	quick_sort(&values, 0, list_size - 1);
-	i = ft_max((list_size / 2) - 1, 0);
+	i = ft_max((list_size / division) - 1, 0);
+	i = ft_min(i, list_size - 1);
+	i = ft_max(i, 0);
 	pivot = values[i];
 	free(values);
 	return (pivot);
+}
+
+int	run_ss(t_sort *sort)
+{
+	t_stack	*stack_a;
+	t_stack	*stack_b;
+
+	stack_a = &sort->stack_a;
+	stack_b = &sort->stack_b;
+	if (stack_size(stack_a) >= 3 && stack_size(stack_b) >= 3
+		&& stack_value(stack_a, 1) > stack_value(stack_a, 2)
+		&& stack_value(stack_b, 1) < stack_value(stack_b, 2))
+		return (TRUE);
+	return (FALSE);
 }

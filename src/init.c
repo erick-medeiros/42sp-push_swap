@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 20:28:03 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/13 00:31:16 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/14 17:14:47 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,54 @@ static void	create_stack(t_stack *stack, int argc, char *argv[])
 
 void	init_sort(t_sort *sort, int argc, char *argv[])
 {
+	int	value;
+	int	size;
 	int	i;
 
 	create_stack(&sort->stack_a, argc, argv);
 	sort->stack_b.top = NULL;
-	sort->list_size = stack_size(&sort->stack_a);
-	sort->values = malloc(sizeof(int) * sort->list_size);
 	sort->min = 0;
 	sort->max = 0;
+	size = stack_size(&sort->stack_a);
 	i = -1;
-	while (++i < sort->list_size)
+	while (++i < size)
 	{
-		sort->values[i] = stack_value(&sort->stack_a, i + 1);
-		sort->min = ft_min(sort->min, sort->values[i]);
-		sort->max = ft_max(sort->max, sort->values[i]);
+		value = stack_value(&sort->stack_a, i + 1);
+		sort->min = ft_min(sort->min, value);
+		sort->max = ft_max(sort->max, value);
 	}
-	quick_sort(&sort->values, 0, sort->list_size - 1);
+}
+
+void	init_move(t_move *move, int index_a, int index_b, int id)
+{
+	move->ra = 0;
+	move->rra = 0;
+	move->rb = 0;
+	move->rrb = 0;
+	move->rr = 0;
+	move->rrr = 0;
+	move->total = 0;
+	move->index_a = index_a;
+	move->index_b = index_b;
+	move->id = id;
+}
+
+t_move	*clone_move(t_move *move)
+{
+	t_move	*clone;
+
+	clone = malloc(sizeof(t_move));
+	if (!clone)
+		return (NULL);
+	clone->ra = move->ra;
+	clone->rra = move->rra;
+	clone->rb = move->rb;
+	clone->rrb = move->rrb;
+	clone->rr = move->rr;
+	clone->rrr = move->rrr;
+	clone->total = move->total;
+	clone->index_a = move->index_a;
+	clone->index_b = move->index_b;
+	clone->id = move->id;
+	return (clone);
 }

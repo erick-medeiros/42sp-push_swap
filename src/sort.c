@@ -6,83 +6,95 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:05:43 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/13 16:47:37 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/14 18:31:12 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "push_swap.h"
 
-static	int	keep_pulling(t_stack *stack_a, t_stack *stack_b, char c, int size)
+static void	rotate_stacks(t_sort *sort, t_move	*move)
 {
-	if (c == 'a')
-		return (stack_not_sorted(stack_a, stack_b)
-			&& stack_size(stack_a) > size);
-	else
-		return (stack_not_sorted(stack_a, stack_b)
-			&& stack_size(stack_b) > size);
+	t_stack	*stack_a;
+	t_stack	*stack_b;
+	int		i;
+
+	stack_a = &sort->stack_a;
+	stack_b = &sort->stack_b;
+	i = 0;
+	while (move && ++i <= move->rr)
+		psl(stack_a, stack_b, "rr");
+	i = 0;
+	while (move && ++i <= move->rrr)
+		psl(stack_a, stack_b, "rrr");
+	i = 0;
+	while (move && ++i <= move->ra)
+		psl(stack_a, stack_b, "ra");
+	i = 0;
+	while (move && ++i <= move->rb)
+		psl(stack_a, stack_b, "rb");
+	i = 0;
+	while (move && ++i <= move->rra)
+		psl(stack_a, stack_b, "rra");
+	i = 0;
+	while (move && ++i <= move->rrb)
+		psl(stack_a, stack_b, "rrb");
 }
 
-static void	double_swap(t_stack *stack_a, t_stack *stack_b)
+static void	pulling_to_b(t_sort *sort, t_stack *stack_a, t_stack *stack_b)
 {
-	if (stack_size(stack_a) >= 2 && stack_size(stack_b) >= 2
-		&& stack_value(stack_a, 1) > stack_value(stack_a, 2)
-		&& stack_value(stack_b, 1) < stack_value(stack_b, 2))
-		psl(stack_a, stack_b, "ss");
-	if (stack_value(stack_b, 1) < stack_value(stack_b, 2))
-		psl(stack_a, stack_b, "sb");
-}
+	t_move	*move;
+	int		pivot;
 
-void	pulling_to_b(t_stack *stack_a, t_stack *stack_b)
-{
-	int	pivot;
-
-	while (keep_pulling(stack_a, stack_b, 'a', 2))
+	while (stack_not_sorted(stack_a, stack_b) && stack_size(stack_a) > 2)
 	{
-		pivot = get_center_pivot(stack_a);
-		while (keep_pulling(stack_a, stack_b, 'a', 2)
-			&& pivot_separated_stack(stack_a, pivot))
-		{
-			if (stack_value(stack_a, 1) <= pivot)
-			{
-				psl(stack_a, stack_b, "pb");
-				double_swap(stack_a, stack_b);
-			}
-			else if (best_pulling_move(stack_a, pivot) == 1)
-				while (stack_value(stack_a, 1) > pivot)
-					psl(stack_a, stack_b, "ra");
-			else
-				while (stack_value(stack_a, 1) > pivot)
-					psl(stack_a, stack_b, "rra");
-		}
+		if (run_ss(sort))
+			psl(stack_a, stack_b, "ss");
+		pivot = get_center_pivot(stack_a, 4);
+		move = movement_a_to_b(sort, pivot);
+		rotate_stacks(sort, move);
+		psl(stack_a, stack_b, "pb");
+		free(move);
 	}
-	if (stack_size(stack_a) >= 2)
-		if (stack_value(stack_a, 1) > stack_value(stack_a, 2))
-			psl(stack_a, stack_b, "sa");
 }
 
-void	pulling_to_a(t_sort *sort, t_stack *stack_a, t_stack *stack_b)
+static void	pulling_to_a(t_sort *sort, t_stack *stack_a, t_stack *stack_b)
 {
+	t_move	*move;
+
 	while (stack_size(stack_b) > 0)
 	{
-		if (best_pulling_to_a(sort) == RUN_PA)
-			psl(stack_a, stack_b, "pa");
-		else
-		{
-			if (best_pulling_to_a(sort) == RUN_SB)
-				psl(stack_a, stack_b, "sb");
-			else if (best_pulling_to_a(sort) == RUN_RB)
-				psl(stack_a, stack_b, "rb");
-			else if (best_pulling_to_a(sort) == RUN_RRB)
-				psl(stack_a, stack_b, "rrb");
-			pulling_to_top_a(sort, best_value_to_pull_b(sort, 1));
-		}
+		move = movement_b_to_a(sort);
+		rotate_stacks(sort, move);
+		psl(stack_a, stack_b, "pa");
+		free(move);
 	}
+}
+
+static void	pulling_to_top_a(t_sort *sort, int value)
+{
+	t_move	move;
+	int		move1;
+	int		move2;
+	int		index;
+
+	if (stack_value(&sort->stack_a, 1) == value)
+		return ;
+	index = stack_index(&sort->stack_a, value) - 1;
+	if (index < 0)
+		return ;
+	init_move(&move, index, -1, 5);
+	move1 = index;
+	move2 = stack_size(&sort->stack_a) - index;
+	if (move1 <= move2)
+		move.ra = move1;
+	else
+		move.rra = move2;
+	rotate_stacks(sort, &move);
 }
 
 void	sort_stacks(t_sort *sort)
 {
-	pulling_to_b(&sort->stack_a, &sort->stack_b);
+	pulling_to_b(sort, &sort->stack_a, &sort->stack_b);
 	pulling_to_a(sort, &sort->stack_a, &sort->stack_b);
 	pulling_to_top_a(sort, sort->min);
 }

@@ -6,165 +6,83 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 12:01:45 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/13 16:43:39 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/14 18:53:14 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	count_to_top(t_sort *sort, int index_b)
-{
-	int	move1;
-	int	move2;
-	int	index;
-	int	value;
-
-	value = best_value_to_pull_b(sort, index_b);
-	if (stack_value(&sort->stack_a, 1) == value)
-		return (-1);
-	index = stack_index(&sort->stack_a, value) - 1;
-	if (index < 0)
-		return (-1);
-	move1 = index;
-	move2 = stack_size(&sort->stack_a) - index;
-	if (move1 <= move2)
-		return (move1);
-	return (move2);
-}
-
-int	best_pulling_move(t_stack *stack, int pivot)
-{
-	t_element	*element;
-	int			found;
-	int			move1;
-	int			move2;
-
-	move1 = 0;
-	move2 = 0;
-	found = 0;
-	element = stack->top;
-	while (element)
-	{
-		if (element->data <= pivot)
-		{
-			found = 1;
-			move2 = 0;
-		}
-		if (found)
-			++move2;
-		else
-			++move1;
-		element = element->next;
-	}
-	if (move1 <= move2)
-		return (1);
-	return (2);
-}
-
-int	best_pulling_to_a(t_sort *sort)
-{
-	t_move	none;
-	t_move	sb;
-	t_move	rb;
-	t_move	rrb;
-
-	if (stack_index(&sort->stack_a, best_value_to_pull_b(sort, 1)) == 1)
-		return (RUN_PA);
-	none.total = count_to_top(sort, 1);
-	none.new_top = stack_value(&sort->stack_b, 2);
-	sb.total = count_to_top(sort, 2) + 1;
-	if (stack_size(&sort->stack_b) <= 2)
-		return (RUN_SB);
-	sb.new_top = stack_value(&sort->stack_b, 1);
-	rb.total = count_to_top(sort, 2) + 1;
-	rb.new_top = stack_value(&sort->stack_b, 3);
-	rrb.total = count_to_top(sort, stack_size(&sort->stack_b)) + 1;
-	rrb.new_top = stack_value(&sort->stack_b, stack_size(&sort->stack_b) - 1);
-	if (none.total < sb.total && none.total < ft_min(rb.total, rrb.total))
-		return (RUN_NONE);
-	if (none.total == sb.total && none.total < ft_min(rb.total, rrb.total))
-	{
-		if (none.new_top > sb.new_top)
-			return (RUN_NONE);
-		return (RUN_SB);
-	}
-	if (none.total == rb.total && none.total < ft_min(sb.total, rrb.total))
-	{
-		if (none.new_top > rb.new_top)
-			return (RUN_NONE);
-		return (RUN_RB);
-	}
-	if (none.total == rrb.total && none.total < ft_min(sb.total, rb.total))
-	{
-		if (none.new_top > rrb.new_top)
-			return (RUN_NONE);
-		return (RUN_RRB);
-	}
-	if (sb.total < ft_min(rb.total, rrb.total))
-		return (RUN_SB);
-	if (sb.total == rb.total && sb.total < rrb.total)
-	{
-		if (sb.new_top > rb.new_top)
-			return (RUN_SB);
-		return (RUN_RB);
-	}
-	if (sb.total == rrb.total && sb.total < rb.total)
-	{
-		if (sb.new_top > rrb.new_top)
-			return (RUN_SB);
-		return (RUN_RRB);
-	}
-	if (rb.total < rrb.total)
-		return (RUN_RB);
-	if (rb.total == rrb.total)
-	{
-		if (rb.new_top > rrb.new_top)
-			return (RUN_RB);
-		return (RUN_RRB);
-	}
-	return (RUN_RRB);
-}
-
-void	pulling_to_top_a(t_sort *sort, int value)
-{
-	int	move1;
-	int	move2;
-	int	index;
-
-	if (stack_value(&sort->stack_a, 1) == value)
-		return ;
-	index = stack_index(&sort->stack_a, value) - 1;
-	if (index < 0)
-		return ;
-	move1 = index;
-	move2 = stack_size(&sort->stack_a) - index;
-	if (move1 <= move2)
-		while (stack_value(&sort->stack_a, 1) != value)
-			psl(&sort->stack_a, &sort->stack_b, "ra");
-	else
-		while (stack_value(&sort->stack_a, 1) != value)
-			psl(&sort->stack_a, &sort->stack_b, "rra");
-}
-
-int	best_value_to_pull_b(t_sort *sort, int index_b)
+static int	best_value_ab(t_sort *sort, int index_b)
 {
 	int	i;
-	int	nbr;
 	int	value_b;
 	int	value_a;
-	int	len;
+	int	index_a;
+	int	value_i;
 
 	value_b = stack_value(&sort->stack_b, index_b);
 	i = 0;
-	nbr = value_b;
-	len = stack_size(&sort->stack_a);
-	while (++i <= len)
+	index_a = 0;
+	while (++i <= stack_size(&sort->stack_a))
 	{
-		value_a = stack_value(&sort->stack_a, i);
-		if (nbr == value_b && value_a > value_b)
-			nbr = value_a;
-		if (value_a > value_b && value_a < nbr)
-			nbr = value_a;
+		value_a = stack_value(&sort->stack_a, index_a);
+		value_i = stack_value(&sort->stack_a, i);
+		if (index_a == 0 && value_i > value_b)
+			index_a = i;
+		else if (value_i > value_b && value_i < value_a)
+			index_a = i;
 	}
-	return (nbr);
+	return (index_a);
+}
+
+t_move	*movement_a_to_b(t_sort *sort, int pivot)
+{
+	t_move	*top;
+	t_move	*bot;
+	int		i_top;
+	int		i_bot;
+	int		size;
+
+	size = stack_size(&sort->stack_a);
+	i_top = 1;
+	while (i_top <= size && stack_value(&sort->stack_a, i_top) > pivot)
+		++i_top;
+	i_bot = size;
+	while (i_bot > 0 && stack_value(&sort->stack_a, i_bot) > pivot)
+		--i_bot;
+	top = check_move(sort, i_top, 1);
+	bot = check_move(sort, i_bot, 1);
+	if (top && bot && top->total <= bot->total)
+	{
+		free(bot);
+		return (top);
+	}
+	free(top);
+	return (bot);
+}
+
+t_move	*movement_b_to_a(t_sort *sort)
+{
+	t_move	*move;
+	t_move	*tmp;
+	int		index_b;
+	int		index_a;
+
+	index_b = 0;
+	move = NULL;
+	while (++index_b <= stack_size(&sort->stack_b))
+	{
+		index_a = best_value_ab(sort, index_b);
+		tmp = check_move(sort, index_a, index_b);
+		if (index_b == 1)
+			move = tmp;
+		if (tmp && move && tmp->total < move->total)
+		{
+			free(move);
+			move = tmp;
+		}
+		else if (tmp != move)
+			free(tmp);
+	}
+	return (move);
 }
