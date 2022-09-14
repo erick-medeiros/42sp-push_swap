@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:30:16 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/14 19:25:12 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/14 19:42:35 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	main(int argc, char *argv[])
 	int		is_sorted;
 
 	if (argc == 1)
-		return (0);
+		return (1);
 	if (check_args(argc, argv))
 		exit_program(1, "Error", STDERR);
 	init_sort(&sort, argc, argv);
