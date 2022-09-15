@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:30:16 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/14 20:03:08 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/15 00:36:51 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static void	sorting(t_sort *sort)
 	while (str)
 	{
 		ft_strupd(&str, ft_substr(str, 0, ft_strlen(str) - 1));
-		psl(&sort->stack_a, &sort->stack_b, str);
+		psl(sort, str);
 		if (is_valid(str) == FALSE)
 		{
 			free(str);
@@ -70,7 +70,7 @@ int	main(int argc, char *argv[])
 		exit_program(1, "Error", STDERR);
 	init_sort(&sort, argc, argv);
 	sorting(&sort);
-	is_sorted = stack_not_sorted(&sort.stack_a, &sort.stack_b);
+	is_sorted = stack_not_sorted(&sort);
 	free_sort(&sort);
 	if (is_sorted == 0)
 		exit_program(0, "OK", STDOUT);
