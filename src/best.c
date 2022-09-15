@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 12:01:45 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/14 18:53:14 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/15 09:58:18 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	best_value_ab(t_sort *sort, int index_b)
 	value_b = stack_value(&sort->stack_b, index_b);
 	i = 0;
 	index_a = 0;
-	while (++i <= stack_size(&sort->stack_a))
+	while (++i <= sort->stack_a.size)
 	{
 		value_a = stack_value(&sort->stack_a, index_a);
 		value_i = stack_value(&sort->stack_a, i);
@@ -43,7 +43,7 @@ t_move	*movement_a_to_b(t_sort *sort, int pivot)
 	int		i_bot;
 	int		size;
 
-	size = stack_size(&sort->stack_a);
+	size = sort->stack_a.size;
 	i_top = 1;
 	while (i_top <= size && stack_value(&sort->stack_a, i_top) > pivot)
 		++i_top;
@@ -70,7 +70,7 @@ t_move	*movement_b_to_a(t_sort *sort)
 
 	index_b = 0;
 	move = NULL;
-	while (++index_b <= stack_size(&sort->stack_b))
+	while (++index_b <= sort->stack_b.size)
 	{
 		index_a = best_value_ab(sort, index_b);
 		tmp = check_move(sort, index_a, index_b);

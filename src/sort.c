@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:05:43 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/15 00:28:30 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/15 10:00:56 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static void	pulling_to_b(t_sort *sort)
 	t_move	*move;
 	int		pivot;
 
-	while (stack_not_sorted(sort) && stack_size(&sort->stack_a) > 2)
+	while (stack_not_sorted(sort) && sort->stack_a.size > 2)
 	{
 		if (run_ss(sort))
 			psl(sort, "ss");
@@ -57,7 +57,7 @@ static void	pulling_to_a(t_sort *sort)
 {
 	t_move	*move;
 
-	while (stack_size(&sort->stack_b) > 0)
+	while (sort->stack_b.size > 0)
 	{
 		move = movement_b_to_a(sort);
 		rotate_stacks(sort, move);
@@ -80,7 +80,7 @@ static void	pulling_to_top_a(t_sort *sort, int value)
 		return ;
 	init_move(&move, index, -1, 5);
 	move1 = index;
-	move2 = stack_size(&sort->stack_a) - index;
+	move2 = sort->stack_a.size - index;
 	if (move1 <= move2)
 		move.ra = move1;
 	else

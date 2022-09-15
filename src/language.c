@@ -6,11 +6,10 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 15:27:55 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/15 00:23:34 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/15 10:57:06 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "push_swap.h"
 
 // push swap language == psl
@@ -22,7 +21,8 @@ static void	psl_rotate(t_stack *stack, char *direction);
 
 void	psl(t_sort *sort, char *instruction)
 {
-	ft_putendl_fd(instruction, STDOUT);
+	if (sort->print)
+		ft_putendl_fd(instruction, STDOUT);
 	if (!ft_strcmp(instruction, "sa"))
 		psl_swap(&sort->stack_a);
 	else if (!ft_strcmp(instruction, "sb"))
@@ -78,7 +78,7 @@ static void	psl_swap(t_stack *stack)
 	top->next = next->next;
 	next->next = top;
 	stack->top = next;
-	update_bottom_stack(stack);
+	update_stack(stack);
 }
 
 static void	psl_push(t_stack *stack_origin, t_stack *stack_destiny)
@@ -91,8 +91,8 @@ static void	psl_push(t_stack *stack_origin, t_stack *stack_destiny)
 	stack_origin->top = element->next;
 	element->next = stack_destiny->top;
 	stack_destiny->top = element;
-	update_bottom_stack(stack_origin);
-	update_bottom_stack(stack_destiny);
+	update_stack(stack_origin);
+	update_stack(stack_destiny);
 }
 
 static void	psl_rotate(t_stack *stack, char *direction)
@@ -116,6 +116,6 @@ static void	psl_rotate(t_stack *stack, char *direction)
 	{
 		bot->next = top;
 		stack->top = bot;
-		update_bottom_stack(stack);
 	}
+	update_stack(stack);
 }

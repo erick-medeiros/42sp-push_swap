@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 19:47:24 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/14 17:24:47 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/15 10:01:28 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	get_center_pivot(t_stack *stack, int division)
 	int	i;
 	int	pivot;
 
-	list_size = stack_size(stack);
+	list_size = stack->size;
 	values = malloc(sizeof(int) * list_size);
 	if (values == NULL)
 		return (0);
@@ -71,7 +71,7 @@ int	run_ss(t_sort *sort)
 
 	stack_a = &sort->stack_a;
 	stack_b = &sort->stack_b;
-	if (stack_size(stack_a) >= 3 && stack_size(stack_b) >= 3
+	if (stack_a->size >= 3 && stack_b->size >= 3
 		&& stack_value(stack_a, 1) > stack_value(stack_a, 2)
 		&& stack_value(stack_b, 1) < stack_value(stack_b, 2))
 		return (TRUE);

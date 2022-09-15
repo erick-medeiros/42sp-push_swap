@@ -6,21 +6,28 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:22:13 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/15 00:27:04 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/15 10:22:07 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	update_bottom_stack(t_stack *stack)
+void	update_stack(t_stack *stack)
 {
-	t_element	*bot;
+	t_element	*node;
 
-	bot = stack->top;
-	while (bot && bot->next && bot->next != stack->top)
-		bot = bot->next;
-	if (bot)
-		bot->next = NULL;
+	stack->size = 0;
+	node = stack->top;
+	while (node && node->next && node->next != stack->top)
+	{
+		node = node->next;
+		++stack->size;
+	}
+	if (node)
+	{
+		node->next = NULL;
+		++stack->size;
+	}
 }
 
 int	stack_not_sorted(t_sort *sort)
@@ -44,21 +51,6 @@ int	stack_not_sorted(t_sort *sort)
 	return (0);
 }
 
-int	stack_size(t_stack *stack)
-{
-	t_element	*element;
-	int			size;
-
-	size = 0;
-	element = stack->top;
-	while (element)
-	{
-		element = element->next;
-		++size;
-	}
-	return (size);
-}
-
 int	stack_value(t_stack *stack, int position)
 {
 	t_element	*element;
@@ -66,7 +58,7 @@ int	stack_value(t_stack *stack, int position)
 	int			value;
 
 	if (position <= 0)
-		position = stack_size(stack);
+		position = stack->size;
 	--position;
 	value = 0;
 	i = 0;
@@ -83,14 +75,10 @@ int	stack_value(t_stack *stack, int position)
 
 int	stack_index(t_stack *stack, int value)
 {
-	int	len;
 	int	i;
 
-	len = stack_size(stack);
 	i = 0;
-	if (len == 0)
-		return (i);
-	while (++i <= len)
+	while (++i <= stack->size)
 		if (stack_value(stack, i) == value)
 			return (i);
 	return (0);

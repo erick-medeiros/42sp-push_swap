@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 20:28:03 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/14 17:14:47 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/15 10:28:24 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,16 +37,17 @@ static void	create_stack(t_stack *stack, int argc, char *argv[])
 void	init_sort(t_sort *sort, int argc, char *argv[])
 {
 	int	value;
-	int	size;
 	int	i;
 
 	create_stack(&sort->stack_a, argc, argv);
 	sort->stack_b.top = NULL;
+	sort->print = TRUE;
 	sort->min = 0;
 	sort->max = 0;
-	size = stack_size(&sort->stack_a);
+	update_stack(&sort->stack_a);
+	update_stack(&sort->stack_b);
 	i = -1;
-	while (++i < size)
+	while (++i < sort->stack_a.size)
 	{
 		value = stack_value(&sort->stack_a, i + 1);
 		sort->min = ft_min(sort->min, value);

@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 15:20:00 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/15 00:27:49 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/15 10:58:02 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_element
 typedef struct s_stack
 {
 	t_element	*top;
+	int			size;
 }	t_stack;
 
 typedef struct s_sort
@@ -39,6 +40,7 @@ typedef struct s_sort
 	t_stack	stack_b;
 	int		min;
 	int		max;
+	int		print;
 }	t_sort;
 
 typedef struct s_move
@@ -62,9 +64,8 @@ void	init_sort(t_sort *sort, int argc, char *argv[]);
 void	init_move(t_move *move, int index_a, int index_b, int id);
 t_move	*clone_move(t_move *move);
 void	psl(t_sort *sort, char *instruction);
-void	update_bottom_stack(t_stack *stack);
 int		get_center_pivot(t_stack *stack, int divison);
-int		stack_size(t_stack *stack);
+void	update_stack(t_stack *stack);
 int		stack_value(t_stack *stack, int position);
 int		stack_index(t_stack *stack, int value);
 int		stack_not_sorted(t_sort *sort);
