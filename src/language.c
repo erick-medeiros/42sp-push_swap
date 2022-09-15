@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 15:27:55 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/08/24 18:03:21 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/15 00:23:34 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,31 +20,31 @@ static void	psl_swap(t_stack *stack);
 static void	psl_push(t_stack *stack_origin, t_stack *stack_destiny);
 static void	psl_rotate(t_stack *stack, char *direction);
 
-void	psl(t_stack *stack_a, t_stack *stack_b, char *instruction)
+void	psl(t_sort *sort, char *instruction)
 {
 	ft_putendl_fd(instruction, STDOUT);
 	if (!ft_strcmp(instruction, "sa"))
-		psl_swap(stack_a);
+		psl_swap(&sort->stack_a);
 	else if (!ft_strcmp(instruction, "sb"))
-		psl_swap(stack_b);
+		psl_swap(&sort->stack_b);
 	else if (!ft_strcmp(instruction, "ss"))
-		psl_mult(stack_a, stack_b, "ss");
+		psl_mult(&sort->stack_a, &sort->stack_b, "ss");
 	else if (!ft_strcmp(instruction, "pa"))
-		psl_push(stack_b, stack_a);
+		psl_push(&sort->stack_b, &sort->stack_a);
 	else if (!ft_strcmp(instruction, "pb"))
-		psl_push(stack_a, stack_b);
+		psl_push(&sort->stack_a, &sort->stack_b);
 	else if (!ft_strcmp(instruction, "ra"))
-		psl_rotate(stack_a, "first");
+		psl_rotate(&sort->stack_a, "first");
 	else if (!ft_strcmp(instruction, "rb"))
-		psl_rotate(stack_b, "first");
+		psl_rotate(&sort->stack_b, "first");
 	else if (!ft_strcmp(instruction, "rr"))
-		psl_mult(stack_a, stack_b, "rr");
+		psl_mult(&sort->stack_a, &sort->stack_b, "rr");
 	else if (!ft_strcmp(instruction, "rra"))
-		psl_rotate(stack_a, "last");
+		psl_rotate(&sort->stack_a, "last");
 	else if (!ft_strcmp(instruction, "rrb"))
-		psl_rotate(stack_b, "last");
+		psl_rotate(&sort->stack_b, "last");
 	else if (!ft_strcmp(instruction, "rrr"))
-		psl_mult(stack_a, stack_b, "rrr");
+		psl_mult(&sort->stack_a, &sort->stack_b, "rrr");
 }
 
 static void	psl_mult(t_stack *stack_a, t_stack *stack_b, char *instruction)

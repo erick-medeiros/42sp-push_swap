@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:05:43 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/14 18:31:12 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/15 00:28:30 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,58 +14,54 @@
 
 static void	rotate_stacks(t_sort *sort, t_move	*move)
 {
-	t_stack	*stack_a;
-	t_stack	*stack_b;
 	int		i;
 
-	stack_a = &sort->stack_a;
-	stack_b = &sort->stack_b;
 	i = 0;
 	while (move && ++i <= move->rr)
-		psl(stack_a, stack_b, "rr");
+		psl(sort, "rr");
 	i = 0;
 	while (move && ++i <= move->rrr)
-		psl(stack_a, stack_b, "rrr");
+		psl(sort, "rrr");
 	i = 0;
 	while (move && ++i <= move->ra)
-		psl(stack_a, stack_b, "ra");
+		psl(sort, "ra");
 	i = 0;
 	while (move && ++i <= move->rb)
-		psl(stack_a, stack_b, "rb");
+		psl(sort, "rb");
 	i = 0;
 	while (move && ++i <= move->rra)
-		psl(stack_a, stack_b, "rra");
+		psl(sort, "rra");
 	i = 0;
 	while (move && ++i <= move->rrb)
-		psl(stack_a, stack_b, "rrb");
+		psl(sort, "rrb");
 }
 
-static void	pulling_to_b(t_sort *sort, t_stack *stack_a, t_stack *stack_b)
+static void	pulling_to_b(t_sort *sort)
 {
 	t_move	*move;
 	int		pivot;
 
-	while (stack_not_sorted(stack_a, stack_b) && stack_size(stack_a) > 2)
+	while (stack_not_sorted(sort) && stack_size(&sort->stack_a) > 2)
 	{
 		if (run_ss(sort))
-			psl(stack_a, stack_b, "ss");
-		pivot = get_center_pivot(stack_a, 4);
+			psl(sort, "ss");
+		pivot = get_center_pivot(&sort->stack_a, 4);
 		move = movement_a_to_b(sort, pivot);
 		rotate_stacks(sort, move);
-		psl(stack_a, stack_b, "pb");
+		psl(sort, "pb");
 		free(move);
 	}
 }
 
-static void	pulling_to_a(t_sort *sort, t_stack *stack_a, t_stack *stack_b)
+static void	pulling_to_a(t_sort *sort)
 {
 	t_move	*move;
 
-	while (stack_size(stack_b) > 0)
+	while (stack_size(&sort->stack_b) > 0)
 	{
 		move = movement_b_to_a(sort);
 		rotate_stacks(sort, move);
-		psl(stack_a, stack_b, "pa");
+		psl(sort, "pa");
 		free(move);
 	}
 }
@@ -94,7 +90,7 @@ static void	pulling_to_top_a(t_sort *sort, int value)
 
 void	sort_stacks(t_sort *sort)
 {
-	pulling_to_b(sort, &sort->stack_a, &sort->stack_b);
-	pulling_to_a(sort, &sort->stack_a, &sort->stack_b);
+	pulling_to_b(sort);
+	pulling_to_a(sort);
 	pulling_to_top_a(sort, sort->min);
 }

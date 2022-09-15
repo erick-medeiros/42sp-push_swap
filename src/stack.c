@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:22:13 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/13 00:30:49 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/15 00:27:04 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,19 @@ void	update_bottom_stack(t_stack *stack)
 		bot->next = NULL;
 }
 
-int	stack_not_sorted(t_stack *stack_a, t_stack *stack_b)
+int	stack_not_sorted(t_sort *sort)
 {
 	t_element	*element;
 	int			value;
 
-	if (stack_b->top != NULL)
+	if (sort->stack_b.top != NULL)
 		return (1);
-	element = stack_a->top;
+	element = sort->stack_a.top;
 	if (element)
 		value = element->data;
 	while (element)
 	{
-		if (element && element != stack_a->top && element->data < value)
+		if (element && element != sort->stack_a.top && element->data < value)
 			return (1);
 		if (element)
 			value = element->data;
