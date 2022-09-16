@@ -6,11 +6,10 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 19:52:55 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/16 10:52:19 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/16 14:17:36 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
 #include "push_swap.h"
 
 static char	*ignore_zero_left(char *argv)
