@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:30:16 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/15 00:36:51 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/15 21:32:59 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,9 @@ int	main(int argc, char *argv[])
 		exit_program(1, "Error", STDERR);
 	init_sort(&sort, argc, argv);
 	sorting(&sort);
-	is_sorted = stack_not_sorted(&sort);
+	is_sorted = sort_checker(&sort);
 	free_sort(&sort);
-	if (is_sorted == 0)
+	if (is_sorted)
 		exit_program(0, "OK", STDOUT);
 	else
 		exit_program(1, "KO", STDERR);

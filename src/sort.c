@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:05:43 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/15 10:00:56 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/16 11:06:17 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void	rotate_stacks(t_sort *sort, t_move	*move)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (move && ++i <= move->rr)
@@ -41,15 +41,19 @@ static void	pulling_to_b(t_sort *sort)
 	t_move	*move;
 	int		pivot;
 
-	while (stack_not_sorted(sort) && sort->stack_a.size > 2)
+	while (stack_is_unsorted(sort->stack_a) && sort->stack_a->size > 2)
 	{
 		if (run_ss(sort))
 			psl(sort, "ss");
-		pivot = get_center_pivot(&sort->stack_a, 4);
-		move = movement_a_to_b(sort, pivot);
-		rotate_stacks(sort, move);
-		psl(sort, "pb");
-		free(move);
+		else
+		{
+			pivot = get_center_pivot(sort->stack_a, 4);
+			move = movement_a_to_b(sort, pivot);
+			rotate_stacks(sort, move);
+			if (stack_is_unsorted(sort->stack_a))
+				psl(sort, "pb");
+			free(move);
+		}
 	}
 }
 
@@ -57,7 +61,7 @@ static void	pulling_to_a(t_sort *sort)
 {
 	t_move	*move;
 
-	while (sort->stack_b.size > 0)
+	while (sort->stack_b->size > 0)
 	{
 		move = movement_b_to_a(sort);
 		rotate_stacks(sort, move);
@@ -66,21 +70,21 @@ static void	pulling_to_a(t_sort *sort)
 	}
 }
 
-static void	pulling_to_top_a(t_sort *sort, int value)
+static void	pulling_to_top(t_sort *sort, t_stack *stack, int value)
 {
 	t_move	move;
 	int		move1;
 	int		move2;
 	int		index;
 
-	if (stack_value(&sort->stack_a, 1) == value)
+	if (stack_value(stack, 1) == value)
 		return ;
-	index = stack_index(&sort->stack_a, value) - 1;
+	index = stack_index(stack, value) - 1;
 	if (index < 0)
 		return ;
 	init_move(&move, index, -1, 5);
 	move1 = index;
-	move2 = sort->stack_a.size - index;
+	move2 = stack->size - index;
 	if (move1 <= move2)
 		move.ra = move1;
 	else
@@ -92,5 +96,5 @@ void	sort_stacks(t_sort *sort)
 {
 	pulling_to_b(sort);
 	pulling_to_a(sort);
-	pulling_to_top_a(sort, sort->min);
+	pulling_to_top(sort, sort->stack_a, sort->min);
 }

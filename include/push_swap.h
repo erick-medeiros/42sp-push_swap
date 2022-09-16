@@ -6,14 +6,14 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 15:20:00 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/15 10:58:02 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/16 11:02:02 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include <libft.h>
+# include "libft.h"
 
 # define STDIN 0
 # define STDOUT 1
@@ -22,22 +22,24 @@
 # define TRUE 1
 # define FALSE 0
 
-typedef struct s_element
+typedef struct s_node
 {
 	int		data;
 	void	*next;
-}	t_element;
+}	t_node;
 
 typedef struct s_stack
 {
-	t_element	*top;
-	int			size;
+	t_node	*top;
+	int		size;
+	int		min;
+	int		max;
 }	t_stack;
 
 typedef struct s_sort
 {
-	t_stack	stack_a;
-	t_stack	stack_b;
+	t_stack	*stack_a;
+	t_stack	*stack_b;
 	int		min;
 	int		max;
 	int		print;
@@ -68,7 +70,8 @@ int		get_center_pivot(t_stack *stack, int divison);
 void	update_stack(t_stack *stack);
 int		stack_value(t_stack *stack, int position);
 int		stack_index(t_stack *stack, int value);
-int		stack_not_sorted(t_sort *sort);
+int		stack_is_unsorted(t_stack *stack);
+int		sort_checker(t_sort *sort);
 void	sort_stacks(t_sort *sort);
 int		run_ss(t_sort *sort);
 t_move	*movement_b_to_a(t_sort *sort);

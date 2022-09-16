@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 19:52:55 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/14 17:11:19 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/16 10:52:19 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,25 +52,27 @@ int	check_args(int argc, char *argv[])
 
 static void	free_stack(t_stack *stack)
 {
-	t_element	*element;
-	t_element	*free_element;
+	t_node	*node;
+	t_node	*free_node;
 
 	if (stack == NULL)
 		return ;
-	element = stack->top;
-	while (element)
+	node = stack->top;
+	while (node)
 	{
-		free_element = element;
-		element = element->next;
-		free(free_element);
+		free_node = node;
+		node = node->next;
+		free(free_node);
 	}
 	stack->top = NULL;
 }
 
 void	free_sort(t_sort *sort)
 {
-	free_stack(&sort->stack_a);
-	free_stack(&sort->stack_b);
+	free_stack(sort->stack_a);
+	free_stack(sort->stack_b);
+	free(sort->stack_a);
+	free(sort->stack_b);
 }
 
 void	exit_program(int status, char *msg, int fd)

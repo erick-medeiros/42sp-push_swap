@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 19:47:24 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/15 10:01:28 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/16 10:24:56 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,9 @@ int	get_center_pivot(t_stack *stack, int division)
 
 int	run_ss(t_sort *sort)
 {
-	t_stack	*stack_a;
-	t_stack	*stack_b;
-
-	stack_a = &sort->stack_a;
-	stack_b = &sort->stack_b;
-	if (stack_a->size >= 3 && stack_b->size >= 3
-		&& stack_value(stack_a, 1) > stack_value(stack_a, 2)
-		&& stack_value(stack_b, 1) < stack_value(stack_b, 2))
+	if (sort->stack_a->size >= 3 && sort->stack_b->size >= 3
+		&& stack_value(sort->stack_a, 1) > stack_value(sort->stack_a, 2)
+		&& stack_value(sort->stack_b, 1) < stack_value(sort->stack_b, 2))
 		return (TRUE);
 	return (FALSE);
 }

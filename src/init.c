@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 20:28:03 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/15 10:28:24 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/16 10:58:39 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 
 static void	create_stack(t_stack *stack, int argc, char *argv[])
 {
-	t_element	*current;
-	t_element	*last;
-	int			i;
+	t_node	*current;
+	t_node	*last;
+	int		i;
 
 	i = argc - 1;
 	last = NULL;
 	while (i >= 1)
 	{
-		current = malloc(sizeof(t_element));
+		current = malloc(sizeof(t_node));
 		if (current == NULL)
 			return ;
 		current->next = last;
@@ -39,17 +39,21 @@ void	init_sort(t_sort *sort, int argc, char *argv[])
 	int	value;
 	int	i;
 
-	create_stack(&sort->stack_a, argc, argv);
-	sort->stack_b.top = NULL;
+	sort->stack_a = malloc(sizeof(t_stack));
+	sort->stack_b = malloc(sizeof(t_stack));
+	if (sort->stack_a == NULL || sort->stack_b == NULL)
+		exit_program(1, "Error malloc", STDERR);
+	create_stack(sort->stack_a, argc, argv);
+	sort->stack_b->top = NULL;
 	sort->print = TRUE;
-	sort->min = 0;
-	sort->max = 0;
-	update_stack(&sort->stack_a);
-	update_stack(&sort->stack_b);
-	i = -1;
-	while (++i < sort->stack_a.size)
+	sort->min = stack_value(sort->stack_a, 1);
+	sort->max = stack_value(sort->stack_a, 1);
+	update_stack(sort->stack_a);
+	update_stack(sort->stack_b);
+	i = 0;
+	while (++i <= sort->stack_a->size)
 	{
-		value = stack_value(&sort->stack_a, i + 1);
+		value = stack_value(sort->stack_a, i);
 		sort->min = ft_min(sort->min, value);
 		sort->max = ft_max(sort->max, value);
 	}

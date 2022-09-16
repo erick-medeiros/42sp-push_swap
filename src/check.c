@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 18:32:24 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/15 19:19:17 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/16 10:18:07 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,10 @@ t_move	*check_move(t_sort *sort, int index_a, int index_b)
 	init_move(&ref, ft_max(index_a, 1), ft_max(index_b, 1), 0);
 	ref.ra = ref.index_a - 1;
 	ref.rb = ref.index_b - 1;
-	if (sort->stack_a.size > 1)
-		ref.rra = sort->stack_a.size - ref.index_a + 1;
-	if (sort->stack_b.size > 1)
-		ref.rrb = sort->stack_b.size - ref.index_b + 1;
+	if (sort->stack_a->size > 1)
+		ref.rra = sort->stack_a->size - ref.index_a + 1;
+	if (sort->stack_b->size > 1)
+		ref.rrb = sort->stack_b->size - ref.index_b + 1;
 	get_move_ra_rb(&ref, &m1, 1);
 	get_move_rra_rrb(&ref, &m2, 2);
 	get_move_ra_rrb(&ref, &m3, 3);
