@@ -6,13 +6,13 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:05:43 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/16 11:06:17 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/16 14:13:41 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	rotate_stacks(t_sort *sort, t_move	*move)
+static void	rotate_stacks(t_sort *sort, t_move *move)
 {
 	int	i;
 
@@ -45,9 +45,17 @@ static void	pulling_to_b(t_sort *sort)
 	{
 		if (run_ss(sort))
 			psl(sort, "ss");
+		else if (run_sa(sort))
+			psl(sort, "sa");
+		else if (run_sa_last(sort))
+		{
+			psl(sort, "rra");
+			psl(sort, "rra");
+			swap_stack(sort, "sa");
+		}
 		else
 		{
-			pivot = get_center_pivot(sort->stack_a, 4);
+			pivot = get_center_pivot(sort->stack_a, 2);
 			move = movement_a_to_b(sort, pivot);
 			rotate_stacks(sort, move);
 			if (stack_is_unsorted(sort->stack_a))
@@ -65,6 +73,12 @@ static void	pulling_to_a(t_sort *sort)
 	{
 		move = movement_b_to_a(sort);
 		rotate_stacks(sort, move);
+		if (run_sb_last(sort))
+		{
+			psl(sort, "rrb");
+			psl(sort, "rrb");
+			swap_stack(sort, "sb");
+		}
 		psl(sort, "pa");
 		free(move);
 	}

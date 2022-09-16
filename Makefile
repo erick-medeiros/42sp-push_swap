@@ -24,6 +24,7 @@ FILES += language.c
 FILES += stack.c
 FILES += best.c
 FILES += check.c
+FILES += swap.c
 SRC = $(addprefix $(SRC_DIR), $(FILES))
 OBJ = $(addprefix $(OBJ_DIR), $(FILES:.c=.o))
 
@@ -36,6 +37,7 @@ FILES_BONUS += language.c
 FILES_BONUS += stack.c
 FILES_BONUS += best.c
 FILES_BONUS += check.c
+FILES_BONUS += swap.c
 SRC_BONUS = $(addprefix $(BONUS_DIR), $(FILES_BONUS))
 OBJ_BONUS = $(addprefix $(OBJ_DIR), $(FILES_BONUS:.c=.o))
 

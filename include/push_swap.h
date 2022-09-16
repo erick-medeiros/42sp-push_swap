@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 15:20:00 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/16 11:02:02 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/16 14:12:31 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,14 @@ int		stack_index(t_stack *stack, int value);
 int		stack_is_unsorted(t_stack *stack);
 int		sort_checker(t_sort *sort);
 void	sort_stacks(t_sort *sort);
-int		run_ss(t_sort *sort);
 t_move	*movement_b_to_a(t_sort *sort);
 t_move	*movement_a_to_b(t_sort *sort, int pivot);
 t_move	*check_move(t_sort *sort, int index_a, int index_b);
+int		run_ss(t_sort *sort);
+int		run_sa(t_sort *sort);
+int		run_sa_last(t_sort	*sort);
+int		run_sb(t_sort *sort);
+int		run_sb_last(t_sort *sort);
+void	swap_stack(t_sort *sort, char *instruction);
 
 #endif
