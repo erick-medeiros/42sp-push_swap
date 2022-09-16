@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 17:22:13 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/16 12:30:08 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/16 14:26:28 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,33 +86,4 @@ int	stack_value(t_stack *stack, int position)
 	if (node)
 		value = node->data;
 	return (value);
-}
-
-int	stack_index(t_stack *stack, int value)
-{
-	int	i;
-
-	i = 0;
-	while (++i <= stack->size)
-		if (stack_value(stack, i) == value)
-			return (i);
-	return (0);
-}
-
-int	sort_checker(t_sort *sort)
-{
-	t_node	*node;
-	int		previous;
-
-	if (sort->stack_b->top != NULL)
-		return (FALSE);
-	node = sort->stack_a->top;
-	while (node)
-	{
-		if (node != sort->stack_a->top && node->data < previous)
-			return (FALSE);
-		previous = node->data;
-		node = node->next;
-	}
-	return (TRUE);
 }

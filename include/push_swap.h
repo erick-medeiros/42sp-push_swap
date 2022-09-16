@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 15:20:00 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/16 14:12:31 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/16 14:26:55 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,7 @@ void	psl(t_sort *sort, char *instruction);
 int		get_center_pivot(t_stack *stack, int divison);
 void	update_stack(t_stack *stack);
 int		stack_value(t_stack *stack, int position);
-int		stack_index(t_stack *stack, int value);
 int		stack_is_unsorted(t_stack *stack);
-int		sort_checker(t_sort *sort);
 void	sort_stacks(t_sort *sort);
 t_move	*movement_b_to_a(t_sort *sort);
 t_move	*movement_a_to_b(t_sort *sort, int pivot);
