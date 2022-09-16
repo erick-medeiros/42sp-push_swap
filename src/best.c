@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 12:01:45 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/16 10:17:29 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/16 19:29:08 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,27 @@
 
 static int	best_value_ab(t_sort *sort, int index_b)
 {
-	int	i;
-	int	value_b;
-	int	value_a;
-	int	index_a;
-	int	value_i;
+	t_node	*node;
+	int		value_b;
+	int		value_a;
+	int		index;
+	int		i;
 
 	value_b = stack_value(sort->stack_b, index_b);
 	i = 0;
-	index_a = 0;
-	while (++i <= sort->stack_a->size)
+	index = 0;
+	node = sort->stack_a->top;
+	while (node)
 	{
-		value_a = stack_value(sort->stack_a, index_a);
-		value_i = stack_value(sort->stack_a, i);
-		if (index_a == 0 && value_i > value_b)
-			index_a = i;
-		else if (value_i > value_b && value_i < value_a)
-			index_a = i;
+		++i;
+		if (node->data > value_b && (index == 0 || node->data < value_a))
+		{
+			index = i;
+			value_a = node->data;
+		}
+		node = node->next;
 	}
-	return (index_a);
+	return (index);
 }
 
 t_move	*movement_a_to_b(t_sort *sort, int pivot)
