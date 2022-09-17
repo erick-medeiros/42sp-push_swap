@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:05:43 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/17 12:58:02 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/17 18:49:20 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,19 +43,7 @@ static void	pulling_to_b(t_sort *sort)
 
 	while (stack_is_unsorted(sort->stack_a) && sort->stack_a->size > 2)
 	{
-		if (run_ss(sort))
-			psl(sort, "ss");
-		else if (sort->stack_a->size < 5)
-		{
-			if (run_sa(sort))
-				psl(sort, "sa");
-			else if (run_sa_last(sort))
-			{
-				psl(sort, "rra");
-				psl(sort, "rra");
-				swap_stack(sort, "sa");
-			}
-		}
+		swap_a(sort);
 		pivot = get_center_pivot(sort->stack_a, 2);
 		move = movement_a_to_b(sort, pivot);
 		rotate_stacks(sort, move);
@@ -73,12 +61,7 @@ static void	pulling_to_a(t_sort *sort)
 	{
 		move = movement_b_to_a(sort);
 		rotate_stacks(sort, move);
-		if (sort->stack_b->size < 5 && run_sb_last(sort))
-		{
-			psl(sort, "rrb");
-			psl(sort, "rrb");
-			swap_stack(sort, "sb");
-		}
+		swap_b(sort);
 		psl(sort, "pa");
 		free(move);
 	}

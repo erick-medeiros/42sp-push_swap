@@ -6,50 +6,67 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 12:30:30 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/16 14:12:23 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/17 19:31:11 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	run_ss(t_sort *sort)
+typedef struct s_swap
+{
+	int	first;
+	int	second;
+	int	penult;
+	int	last;
+}	t_swap;
+
+static void	swap_stack(t_sort *sort, char *instruction)
 {
 	if (sort->stack_a->size >= 3 && sort->stack_b->size >= 3
 		&& stack_value(sort->stack_a, 1) > stack_value(sort->stack_a, 2)
 		&& stack_value(sort->stack_b, 1) < stack_value(sort->stack_b, 2))
-		return (TRUE);
-	return (FALSE);
+		psl(sort, "ss");
+	if (!ft_strcmp(instruction, "sa"))
+	{
+		if (stack_value(sort->stack_a, 1) > stack_value(sort->stack_a, 2))
+			psl(sort, "sa");
+	}
+	else if (!ft_strcmp(instruction, "sb"))
+	{
+		if (stack_value(sort->stack_b, 2) > stack_value(sort->stack_b, 1))
+			psl(sort, "sb");
+	}
 }
 
-int	run_sa(t_sort *sort)
+void	swap_a(t_sort *sort)
 {
-	int	first;
-	int	second;
-	int	last;
+	t_swap	s;
 
-	first = stack_value(sort->stack_a, 1);
-	second = stack_value(sort->stack_a, 2);
-	last = stack_value(sort->stack_a, sort->stack_a->size);
-	return (sort->stack_a->size > 2 && sort->stack_a->size < 5
-		&& last < first && last < second && first > second
-	);
+	s.first = stack_value(sort->stack_a, 1);
+	s.second = stack_value(sort->stack_a, 2);
+	s.penult = stack_value(sort->stack_a, sort->stack_a->size - 1);
+	s.last = stack_value(sort->stack_a, sort->stack_a->size);
+	swap_stack(sort, "ss");
+	if (sort->stack_a->size == 3)
+	{
+		swap_stack(sort, "sa");
+		if (s.last > s.first && s.last < s.second)
+			psl(sort, "rra");
+		swap_stack(sort, "sa");
+	}
+	else if (sort->stack_a->size == 4)
+	{
+		swap_stack(sort, "sa");
+		if (s.first > s.penult && s.first > s.last && s.penult > s.last)
+		{
+			psl(sort, "rra");
+			psl(sort, "rra");
+		}
+		swap_stack(sort, "sa");
+	}
 }
 
-int	run_sa_last(t_sort	*sort)
-{
-	int	first;
-	int	penultimate;
-	int	last;
-
-	first = stack_value(sort->stack_a, 1);
-	last = stack_value(sort->stack_a, sort->stack_a->size);
-	penultimate = stack_value(sort->stack_a, sort->stack_a->size - 1);
-	return (sort->stack_a->size > 2 && sort->stack_a->size < 5
-		&& last < first && penultimate < first && penultimate > last
-	);
-}
-
-int	run_sb_last(t_sort *sort)
+void	swap_b(t_sort *sort)
 {
 	int	first;
 	int	penultimate;
@@ -57,32 +74,21 @@ int	run_sb_last(t_sort *sort)
 	int	top_a;
 	int	bot_a;
 
-	top_a = stack_value(sort->stack_a, 1);
-	bot_a = stack_value(sort->stack_a, sort->stack_a->size);
-	first = stack_value(sort->stack_b, 1);
-	last = stack_value(sort->stack_b, sort->stack_b->size);
-	penultimate = stack_value(sort->stack_b, sort->stack_b->size - 1);
-	return (sort->stack_b->size > 2 && sort->stack_b->size < 5
-		&& last > first && penultimate > first && penultimate < last
-		&& last < top_a && penultimate < top_a && first < top_a
-		&& last > bot_a && penultimate > bot_a && first > bot_a
-	);
-}
-
-void	swap_stack(t_sort *sort, char *instruction)
-{
-	if (!ft_strcmp(instruction, "sa"))
+	if (sort->stack_b->size == 4)
 	{
-		if (run_ss(sort))
-			psl(sort, "ss");
-		else
-			psl(sort, "sa");
-	}
-	else if (!ft_strcmp(instruction, "sb"))
-	{
-		if (run_ss(sort))
-			psl(sort, "ss");
-		else
-			psl(sort, "sb");
+		top_a = stack_value(sort->stack_a, 1);
+		bot_a = stack_value(sort->stack_a, sort->stack_a->size);
+		first = stack_value(sort->stack_b, 1);
+		last = stack_value(sort->stack_b, sort->stack_b->size);
+		penultimate = stack_value(sort->stack_b, sort->stack_b->size - 1);
+		if (last > first && penultimate > first && penultimate < last
+			&& last < top_a && penultimate < top_a && first < top_a
+			&& last > bot_a && penultimate > bot_a && first > bot_a
+		)
+		{
+			psl(sort, "rrb");
+			psl(sort, "rrb");
+			swap_stack(sort, "sb");
+		}
 	}
 }
