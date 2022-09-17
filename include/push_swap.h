@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 15:20:00 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/16 14:26:55 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/17 12:56:54 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ typedef struct s_sort
 
 typedef struct s_move
 {
-	int	id;
 	int	index_a;
 	int	index_b;
 	int	ra;
@@ -63,7 +62,7 @@ int		check_args(int argc, char *argv[]);
 void	exit_program(int status, char *msg, int fd);
 void	free_sort(t_sort *sort);
 void	init_sort(t_sort *sort, int argc, char *argv[]);
-void	init_move(t_move *move, int index_a, int index_b, int id);
+void	init_move(t_move *move, int index_a, int index_b);
 t_move	*clone_move(t_move *move);
 void	psl(t_sort *sort, char *instruction);
 int		get_center_pivot(t_stack *stack, int divison);
@@ -73,7 +72,6 @@ int		stack_is_unsorted(t_stack *stack);
 void	sort_stacks(t_sort *sort);
 t_move	*movement_b_to_a(t_sort *sort);
 t_move	*movement_a_to_b(t_sort *sort, int pivot);
-t_move	*check_move(t_sort *sort, int index_a, int index_b);
 int		run_ss(t_sort *sort);
 int		run_sa(t_sort *sort);
 int		run_sa_last(t_sort	*sort);

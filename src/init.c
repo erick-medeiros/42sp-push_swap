@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 20:28:03 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/16 10:58:39 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/17 12:56:34 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	init_sort(t_sort *sort, int argc, char *argv[])
 	}
 }
 
-void	init_move(t_move *move, int index_a, int index_b, int id)
+void	init_move(t_move *move, int index_a, int index_b)
 {
 	move->ra = 0;
 	move->rra = 0;
@@ -70,7 +70,6 @@ void	init_move(t_move *move, int index_a, int index_b, int id)
 	move->total = 0;
 	move->index_a = index_a;
 	move->index_b = index_b;
-	move->id = id;
 }
 
 t_move	*clone_move(t_move *move)
@@ -89,6 +88,5 @@ t_move	*clone_move(t_move *move)
 	clone->total = move->total;
 	clone->index_a = move->index_a;
 	clone->index_b = move->index_b;
-	clone->id = move->id;
 	return (clone);
 }

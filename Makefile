@@ -21,8 +21,7 @@ FILES += exit.c
 FILES += sort.c
 FILES += utils.c
 FILES += language.c
-FILES += best.c
-FILES += check.c
+FILES += best_move.c
 FILES += swap.c
 SRC = $(addprefix $(SRC_DIR), $(FILES))
 OBJ = $(addprefix $(OBJ_DIR), $(FILES:.c=.o))
@@ -33,8 +32,7 @@ FILES_BONUS += exit.c
 FILES_BONUS += sort.c
 FILES_BONUS += utils.c
 FILES_BONUS += language.c
-FILES_BONUS += best.c
-FILES_BONUS += check.c
+FILES_BONUS += best_move.c
 FILES_BONUS += swap.c
 SRC_BONUS = $(addprefix $(BONUS_DIR), $(FILES_BONUS))
 OBJ_BONUS = $(addprefix $(OBJ_DIR), $(FILES_BONUS:.c=.o))

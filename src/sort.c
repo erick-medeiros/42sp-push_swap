@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:05:43 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/16 17:55:10 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/17 12:58:02 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ static void	pulling_to_top(t_sort *sort, t_stack *stack, int value)
 	index = i - 1;
 	if (index < 0)
 		return ;
-	init_move(&move, index, -1, 5);
+	init_move(&move, index, -1);
 	move1 = index;
 	move2 = stack->size - index;
 	if (move1 <= move2)
