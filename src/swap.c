@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 12:30:30 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/17 19:31:11 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/17 19:42:02 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ void	swap_a(t_sort *sort)
 	}
 	else if (sort->stack_a->size == 4)
 	{
-		swap_stack(sort, "sa");
+		if (s.second > s.penult && s.second > s.last)
+			swap_stack(sort, "sa");
 		if (s.first > s.penult && s.first > s.last && s.penult > s.last)
 		{
 			psl(sort, "rra");
