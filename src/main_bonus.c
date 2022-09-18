@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 12:30:16 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/16 14:27:21 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/17 21:57:48 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,13 +44,14 @@ static void	sorting(t_sort *sort)
 	while (str)
 	{
 		ft_strupd(&str, ft_substr(str, 0, ft_strlen(str) - 1));
-		psl(sort, str);
 		if (is_valid(str) == FALSE)
 		{
 			free(str);
 			free_sort(sort);
 			exit_program(1, "Error", STDERR);
 		}
+		else
+			psl(sort, str);
 		ft_strupd(&str, get_next_line(STDIN));
 	}
 }
