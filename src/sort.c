@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:05:43 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/17 21:41:13 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/17 23:14:42 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,26 +72,22 @@ static void	pulling_to_a(t_sort *sort)
 static void	pulling_to_top(t_sort *sort, t_stack *stack, int value)
 {
 	t_move	move;
-	int		move1;
-	int		move2;
-	int		index;
+	int		ra;
+	int		rra;
 	int		i;
 
 	if (stack_value(stack, 1) == value)
 		return ;
-	i = 1;
-	while (i <= stack->size && stack_value(stack, i) != value)
+	i = 0;
+	while (i < stack->size && stack_value(stack, i + 1) != value)
 		++i;
-	index = i - 1;
-	if (index < 0)
-		return ;
-	init_move(&move, index, -1);
-	move1 = index;
-	move2 = stack->size - index;
-	if (move1 <= move2)
-		move.ra = move1;
+	init_move(&move, i, 0);
+	ra = i;
+	rra = stack->size - i;
+	if (ra <= rra)
+		move.ra = ra;
 	else
-		move.rra = move2;
+		move.rra = rra;
 	rotate_stacks(sort, &move);
 }
 
