@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 21:05:43 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/17 18:49:20 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/17 21:41:13 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,12 @@ static void	pulling_to_b(t_sort *sort)
 	t_move	*move;
 	int		pivot;
 
+	pivot = get_center_pivot(sort->stack_a, 2);
 	while (stack_is_unsorted(sort->stack_a) && sort->stack_a->size > 2)
 	{
 		swap_a(sort);
-		pivot = get_center_pivot(sort->stack_a, 2);
+		if (sort->stack_a->min > pivot)
+			pivot = get_center_pivot(sort->stack_a, 2);
 		move = movement_a_to_b(sort, pivot);
 		rotate_stacks(sort, move);
 		if (stack_is_unsorted(sort->stack_a))
