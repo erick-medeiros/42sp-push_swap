@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sorting_utils.c                                    :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 19:47:24 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/17 10:53:25 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/19 15:45:16 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,21 +43,24 @@ static void	quick_sort(int **values, int start, int end)
 
 int	get_center_pivot(t_stack *stack, int division)
 {
-	int	list_size;
 	int	*values;
 	int	i;
 	int	pivot;
 
-	list_size = stack->size;
-	values = malloc(sizeof(int) * list_size);
+	if (stack->size == 0)
+		return (0);
+	values = malloc(sizeof(int) * stack->size);
 	if (values == NULL)
 		return (0);
 	i = -1;
-	while (++i < list_size)
+	while (++i < stack->size)
 		values[i] = stack_value(stack, i + 1);
-	quick_sort(&values, 0, list_size - 1);
-	i = ft_max((list_size / division) - 1, 0);
-	i = ft_min(i, list_size - 1);
+	quick_sort(&values, 0, stack->size - 1);
+	if (stack->size >= 5 && stack->size <= 100)
+		i = stack->size - 2;
+	else
+		i = (stack->size / division) - 1;
+	i = ft_min(i, stack->size - 2);
 	i = ft_max(i, 0);
 	pivot = values[i];
 	free(values);

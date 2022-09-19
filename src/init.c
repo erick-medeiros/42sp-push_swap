@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/12 20:28:03 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/17 12:56:34 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/19 13:57:47 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	init_sort(t_sort *sort, int argc, char *argv[])
 	sort->max = stack_value(sort->stack_a, 1);
 	update_stack(sort->stack_a);
 	update_stack(sort->stack_b);
+	sort->size = sort->stack_a->size;
 	i = 0;
 	while (++i <= sort->stack_a->size)
 	{

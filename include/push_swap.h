@@ -6,7 +6,7 @@
 /*   By: eandre-f <eandre-f@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/23 15:20:00 by eandre-f          #+#    #+#             */
-/*   Updated: 2022/09/17 18:48:42 by eandre-f         ###   ########.fr       */
+/*   Updated: 2022/09/19 13:58:04 by eandre-f         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_sort
 	t_stack	*stack_b;
 	int		min;
 	int		max;
+	int		size;
 	int		print;
 }	t_sort;
 
